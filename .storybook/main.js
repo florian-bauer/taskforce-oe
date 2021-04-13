@@ -5,6 +5,16 @@ module.exports = {
     stories: ["../**/*.stories.@(js|jsx|ts|tsx)"],
     addons: ["@storybook/addon-links", "@storybook/addon-essentials"],
     webpackFinal: async (config) => {
+        config.resolve.modules = [
+            path.resolve(__dirname, ".."),
+            "node_modules",
+        ];
+
+        config.resolve.alias = {
+            ...config.resolve.alias,
+            "@/components": path.resolve(__dirname, "../components"),
+            "@/styles": path.resolve(__dirname, "../styles"),
+        };
         return {
             ...config,
             resolve: {
