@@ -1,6 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { addDecorator } from "@storybook/react";
-import Theme, { Fonts } from "../styles/chakra-theme";
+import Theme, { Fonts } from "@/styles/chakra-theme";
 
 /**
  * Adding the Charka Provider to enable
