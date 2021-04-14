@@ -10,7 +10,7 @@ import { Global } from "@emotion/react";
 export const Fonts = () => (
     <Global
         styles={
-            '@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap");'
+            '@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");'
         }
     />
 );
@@ -27,12 +27,19 @@ export default extendTheme({
     fontWeights: {
         thin: 300,
         normal: 400,
+        regular: 500,
         medium: 600,
         bold: 700,
     },
     config: {
         initialColorMode: "light",
         useSystemColorMode: false,
+    },
+    colors: {
+        gray: {
+            50: "#F8FAFF",
+            900: "#1B202B",
+        },
     },
     styles: {
         global: () => ({
