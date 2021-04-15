@@ -15,6 +15,7 @@ module.exports = {
             "@/components": path.resolve(__dirname, "../components"),
             "@/styles": path.resolve(__dirname, "../styles"),
             "@/hooks": path.resolve(__dirname, "../hooks"),
+            "@/constants": path.resolve(__dirname, "../constants"),
         };
         return {
             ...config,

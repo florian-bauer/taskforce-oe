@@ -6,5 +6,6 @@ module.exports = {
         "@/components/(.*)": "<rootDir>/components/$1",
         "@/styles/(.*)": "<rootDir>/components/$1",
         "@/hooks/(.*)": "<rootDir>/hooks/$1",
+        "@/constants/(.*)": "<rootDir>/constants/$1",
     },
 };
