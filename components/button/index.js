@@ -1,13 +1,15 @@
 import { Button as ChakraButton } from "@chakra-ui/react";
 import PropTypes from "prop-types";
+import { useBoolean } from "@/hooks/useBoolean";
 
 const Button = ({ label, primary, onClick, ...props }) => {
-    // TODO(developer): Write a Hook that handles colors depending on boolean
-    const bg = primary ? "gray.900" : "gray.100";
-    const bgHover = primary ? "gray.700" : "gray.300";
-    const bgActive = primary ? "gray.600" : "gray.400";
-    const color = primary ? "gray.100" : "gray.900";
-    const fontWeight = primary ? "medium" : "regular";
+    const { useFlag } = useBoolean(primary);
+
+    const bg = useFlag("gray.900", "gray.100");
+    const bgHover = useFlag("gray.700", "gray.300");
+    const bgActive = useFlag("gray.600", "gray.400");
+    const color = useFlag("gray.100", "gray.900");
+    const fontWeight = useFlag("medium", "regular");
 
     return (
         <ChakraButton
