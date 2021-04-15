@@ -29,8 +29,8 @@ const _args = {
         },
     ],
     is: {
-        owner: false,
-        administrator: false,
+        owner: true,
+        administrator: true,
     },
 };
 
