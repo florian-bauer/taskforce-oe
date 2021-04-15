@@ -1,5 +1,8 @@
 {
     "conventionalCommits.scopes": [
-        "storybook"
+        "storybook",
+        "chakra-ui",
+        "components",
+        "hooks"
     ]
 }
