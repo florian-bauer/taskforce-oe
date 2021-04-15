@@ -5,5 +5,6 @@ module.exports = {
         "\\.(css|less|scss|sass)$": "identity-obj-proxy",
         "@/components/(.*)": "<rootDir>/components/$1",
         "@/styles/(.*)": "<rootDir>/components/$1",
+        "@/hooks/(.*)": "<rootDir>/hooks/$1",
     },
 };
