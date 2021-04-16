@@ -7,7 +7,7 @@ const Filter = ({ collection, onChange, ...props }) => {
     const { getRootProps, getRadioProps } = useRadioGroup({
         name: "Status",
         defaultValue: "Alle",
-        onChange: console.log,
+        onChange,
     });
 
     const group = getRootProps();
