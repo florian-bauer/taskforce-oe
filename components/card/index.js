@@ -16,6 +16,7 @@ const Card = ({
     description,
     status,
     is,
+    ...props
 }) => {
     // Users (non-owners & non-admins) should not be able to see the card when it is "deleted"
     if (!is.owner && !is.administrator && status === DELETED) return <></>;
@@ -49,6 +50,7 @@ const Card = ({
             position="relative"
             flexDirection="column"
             boxShadow={is.owner && "lg"}
+            {...props}
         >
             <CardBadge colorScheme={colorScheme} label={label} />
             <CardHeader
