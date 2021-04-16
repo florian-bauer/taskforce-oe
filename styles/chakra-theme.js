@@ -45,9 +45,11 @@ export default extendTheme({
         global: () => ({
             "html, body": {
                 transition: "background 0s",
+                WebkitTapHighlightColor: "transparent",
             },
             "html, body, #__next": {
                 height: "100%",
+                width: "100%",
             },
         }),
     },
