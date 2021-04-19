@@ -2,7 +2,7 @@ import { ActionModal as ActionModalComponent } from "@/components/action-modal";
 import { Button } from "@/components/button";
 
 export default {
-    title: "Action Modal",
+    title: "Modals/Action",
     component: ActionModalComponent,
 };
 
