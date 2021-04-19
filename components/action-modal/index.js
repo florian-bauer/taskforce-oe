@@ -11,12 +11,19 @@ import {
 } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 
-const DeleteModal = ({ onDelete, label, ...props }) => {
+const ActionModal = ({
+    open,
+    header,
+    body,
+    labelAbort,
+    labelAction,
+    onAction,
+}) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
         <>
-            <Button onClick={onOpen} label={label} {...props} />
+            {open(onOpen)}
             <Modal
                 isCentered
                 onClose={onClose}
@@ -25,24 +32,18 @@ const DeleteModal = ({ onDelete, label, ...props }) => {
             >
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Bist du dir sicher?</ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody>
-                        Du kannst den Vorschlag dann nicht mehr herstellen!
-                    </ModalBody>
+                    <ModalHeader>{header}</ModalHeader>
+                    <ModalBody>{body}</ModalBody>
                     <ModalFooter>
+                        <Button mr={3} onClick={onClose} label={labelAbort} />
                         <Button
-                            mr={3}
-                            onClick={onClose}
-                            label="Vorschlag behalten"
-                        />
-                        <Button
-                            label="Endgültig löschen"
+                            label={labelAction}
                             primary
                             background="red.500"
                             _hover={{ bg: "red.400" }}
                             _active={{ bg: "red.300" }}
-                            onClick={onDelete}
+                            onClick={() => onAction(onClose)}
                         />
                     </ModalFooter>
                 </ModalContent>
@@ -51,13 +52,13 @@ const DeleteModal = ({ onDelete, label, ...props }) => {
     );
 };
 
-DeleteModal.defaultProps = {
-    label: "Open Modal",
+ActionModal.propTypes = {
+    open: PropTypes.func.isRequired,
+    header: PropTypes.any.isRequired,
+    body: PropTypes.any.isRequired,
+    labelAbort: PropTypes.string.isRequired,
+    labelAction: PropTypes.string.isRequired,
+    onAction: PropTypes.func.isRequired,
 };
 
-DeleteModal.propTypes = {
-    label: PropTypes.string,
-    onDelete: PropTypes.func.isRequired,
-};
-
-export { DeleteModal };
+export { ActionModal };
