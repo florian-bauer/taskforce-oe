@@ -3,10 +3,10 @@ import { Flex, HStack, useRadioGroup } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import { Children } from "react";
 
-const Filter = ({ collection, onChange, ...props }) => {
+const Filter = ({ collection, onChange, name, defaultValue, ...props }) => {
     const { getRootProps, getRadioProps } = useRadioGroup({
-        name: "Status",
-        defaultValue: "Alle",
+        name,
+        defaultValue,
         onChange,
     });
 
@@ -34,9 +34,11 @@ Filter.propTypes = {
         PropTypes.shape({
             label: PropTypes.string.isRequired,
             color: PropTypes.string,
-        })
+        }).isRequired
     ),
     onChange: PropTypes.func,
+    name: PropTypes.string.isRequired,
+    defaultValue: PropTypes.string.isRequired,
 };
 
 export { Filter };
