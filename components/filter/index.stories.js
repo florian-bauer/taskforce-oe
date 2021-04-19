@@ -32,4 +32,6 @@ Filter.args = {
         },
     ],
     onChange: console.log,
+    name: "Status",
+    defaultValue: "Alle",
 };
