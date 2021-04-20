@@ -1,9 +1,17 @@
 import { RadioCard } from "@/components/filter/RadioCard";
-import { Flex, HStack, useRadioGroup } from "@chakra-ui/react";
+import { Flex, HStack, VStack, useRadioGroup } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import { Children } from "react";
+import { useOptions } from "@/hooks/useOptions";
 
-const Filter = ({ collection, onChange, name, defaultValue, ...props }) => {
+const Filter = ({
+    collection,
+    onChange,
+    name,
+    defaultValue,
+    direction,
+    ...props
+}) => {
     const { getRootProps, getRadioProps } = useRadioGroup({
         name,
         defaultValue,
@@ -12,9 +20,14 @@ const Filter = ({ collection, onChange, name, defaultValue, ...props }) => {
 
     const group = getRootProps();
 
+    const Wrapper = useOptions(direction, [
+        { is: "row", be: HStack },
+        { is: "column", be: VStack },
+    ]);
+
     return (
         <Flex overflowY="auto" width="100%" {...props}>
-            <HStack {...group}>
+            <Wrapper {...group} alignItems="stretch" width="100%">
                 {Children.toArray(
                     collection.map(({ label, color }) => (
                         <RadioCard
@@ -24,7 +37,7 @@ const Filter = ({ collection, onChange, name, defaultValue, ...props }) => {
                         />
                     ))
                 )}
-            </HStack>
+            </Wrapper>
         </Flex>
     );
 };
@@ -39,6 +52,11 @@ Filter.propTypes = {
     onChange: PropTypes.func,
     name: PropTypes.string.isRequired,
     defaultValue: PropTypes.string.isRequired,
+    direction: PropTypes.string,
+};
+
+Filter.defaultProps = {
+    direction: "row",
 };
 
 export { Filter };
