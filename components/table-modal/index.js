@@ -1,15 +1,5 @@
 import { ConfirmModal } from "@/components/confirm-modal";
-import {
-    Avatar,
-    Flex,
-    Table,
-    Tbody,
-    Td,
-    Text,
-    Th,
-    Thead,
-    Tr,
-} from "@chakra-ui/react";
+import { Table, Tbody, Td, Tr } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import { Children } from "react";
 
