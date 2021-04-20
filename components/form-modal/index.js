@@ -33,6 +33,7 @@ const FormModal = ({
                 onClose={onClose}
                 isOpen={isOpen}
                 motionPreset="slideInBottom"
+                scrollBehavior="inside"
             >
                 <ModalOverlay />
                 <ModalContent>

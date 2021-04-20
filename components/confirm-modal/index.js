@@ -11,7 +11,14 @@ import {
 } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 
-const ConfirmModal = ({ open, header, body, labelConfirm, onConfirm }) => {
+const ConfirmModal = ({
+    open,
+    header,
+    body,
+    labelConfirm,
+    onConfirm,
+    ...props
+}) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
@@ -22,12 +29,13 @@ const ConfirmModal = ({ open, header, body, labelConfirm, onConfirm }) => {
                 onClose={onClose}
                 isOpen={isOpen}
                 motionPreset="slideInBottom"
+                scrollBehavior="inside"
             >
                 <ModalOverlay />
                 <ModalContent>
                     <ModalCloseButton />
                     <ModalHeader>{header}</ModalHeader>
-                    <ModalBody>{body}</ModalBody>
+                    <ModalBody {...props}>{body}</ModalBody>
                     <ModalFooter>
                         <Button
                             primary
@@ -49,7 +57,11 @@ ConfirmModal.propTypes = {
     header: PropTypes.any.isRequired,
     body: PropTypes.any.isRequired,
     labelConfirm: PropTypes.string.isRequired,
-    onConfirm: PropTypes.func.isRequired,
+    onConfirm: PropTypes.func,
+};
+
+ConfirmModal.defaultProps = {
+    onConfirm: () => {},
 };
 
 export { ConfirmModal };
