@@ -6,7 +6,6 @@ import {
     Tr,
     VStack,
     FormControl,
-    FormLabel,
     Input,
 } from "@chakra-ui/react";
 import PropTypes from "prop-types";
