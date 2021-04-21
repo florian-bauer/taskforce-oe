@@ -45,7 +45,6 @@ const Card = ({
             borderColor={borderColor}
             borderRadius={10}
             w="100%"
-            maxW="500px"
             p={6}
             position="relative"
             flexDirection="column"

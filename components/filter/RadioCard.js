@@ -1,7 +1,7 @@
 import { Box, Text, useRadio, useStyleConfig } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 
-const RadioCard = ({ label, color, ...props }) => {
+const RadioCard = ({ label, color, pr, ...props }) => {
     const { getInputProps, getCheckboxProps } = useRadio(props);
 
     const input = getInputProps();
@@ -10,7 +10,7 @@ const RadioCard = ({ label, color, ...props }) => {
     const styles = useStyleConfig("Button", { variant: "solid" });
 
     return (
-        <Box as="label">
+        <Box as="label" pr={pr}>
             <input
                 {...input}
                 style={{ width: 0, height: 0, position: "absolute" }}

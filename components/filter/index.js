@@ -10,6 +10,7 @@ const Filter = ({
     name,
     defaultValue,
     direction,
+    p,
     ...props
 }) => {
     const { getRootProps, getRadioProps } = useRadioGroup({
@@ -26,14 +27,15 @@ const Filter = ({
     ]);
 
     return (
-        <Flex overflowY="auto" width="100%" {...props}>
+        <Flex overflowY="auto" width="100%" p={p} {...props}>
             <Wrapper {...group} alignItems="stretch" width="100%">
                 {Children.toArray(
-                    collection.map(({ label, color }) => (
+                    collection.map(({ label, color }, index, array) => (
                         <RadioCard
                             {...getRadioProps({ value: label })}
                             label={label}
                             color={color}
+                            pr={index === array.length - 1 && p}
                         />
                     ))
                 )}
@@ -53,10 +55,12 @@ Filter.propTypes = {
     name: PropTypes.string.isRequired,
     defaultValue: PropTypes.string.isRequired,
     direction: PropTypes.string,
+    p: PropTypes.number,
 };
 
 Filter.defaultProps = {
     direction: "row",
+    p: 0,
 };
 
 export { Filter };
