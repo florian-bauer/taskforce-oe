@@ -3,6 +3,7 @@
         "storybook",
         "chakra-ui",
         "components",
-        "hooks"
+        "hooks",
+        "pages"
     ]
 }
