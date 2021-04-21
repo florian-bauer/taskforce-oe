@@ -10,7 +10,7 @@ const RadioCard = ({ label, color, ...props }) => {
     const styles = useStyleConfig("Button", { variant: "solid" });
 
     return (
-        <Box as="label">
+        <Box as="label" {...props}>
             <input
                 {...input}
                 style={{ width: 0, height: 0, position: "absolute" }}
