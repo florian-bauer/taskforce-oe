@@ -16,7 +16,7 @@ const Login = () => {
         <>
             <Head>
                 <title>Log-In | Taskforce OE | BCM Solutions</title>
-                <link rel="icon" href="/favicon.png" />
+                <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <Flex
