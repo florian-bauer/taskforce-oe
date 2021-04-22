@@ -5,6 +5,7 @@
         "components",
         "hooks",
         "pages",
-        "lib"
+        "lib",
+        "auth"
     ]
 }
