@@ -7,5 +7,6 @@ module.exports = {
         "@/styles/(.*)": "<rootDir>/styles/$1",
         "@/hooks/(.*)": "<rootDir>/hooks/$1",
         "@/constants/(.*)": "<rootDir>/constants/$1",
+        "@/lib/(.*)": "<rootDir>/lib/$1",
     },
 };
