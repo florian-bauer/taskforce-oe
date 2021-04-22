@@ -4,6 +4,7 @@
         "chakra-ui",
         "components",
         "hooks",
-        "pages"
+        "pages",
+        "lib"
     ]
 }
