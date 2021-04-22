@@ -12,6 +12,12 @@ import {
     Skeleton,
     useBreakpointValue,
 } from "@chakra-ui/react";
+import firebase from "firebase";
+import {
+    AuthAction,
+    withAuthUser,
+    withAuthUserTokenSSR,
+} from "next-firebase-auth";
 import Head from "next/head";
 
 const args = {
@@ -51,6 +57,8 @@ const Index = () => {
         sm: { minChildWidth: "400px" },
     });
 
+    const onSignOut = async () => await firebase.auth().signOut();
+
     return (
         <>
             <Head>
@@ -70,6 +78,7 @@ const Index = () => {
                         label="Log Out"
                         rightIcon={<ChevronRightIcon />}
                         size="sm"
+                        onClick={onSignOut}
                     />
                 </Flex>
 
@@ -104,4 +113,8 @@ const Index = () => {
     );
 };
 
-export default Index;
+export const getServerSideProps = withAuthUserTokenSSR()();
+
+export default withAuthUser({
+    whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
+})(Index);
