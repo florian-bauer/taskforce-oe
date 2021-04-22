@@ -63,7 +63,7 @@ const Index = () => {
         <>
             <Head>
                 <title>Taskforce OE | BCM Solutions</title>
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/favicon.png" />
             </Head>
 
             <Flex flexDir="column">
