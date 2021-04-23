@@ -3,6 +3,7 @@ import { Card } from "@/components/card";
 import { CardButton } from "@/components/card-button";
 import { Filter } from "@/components/filter";
 import { FINISHED, PROGRESS, VOTING } from "@/constants/status";
+import { AuthorizeUsersOrganisation } from "@/lib/auth/provider";
 import { AddIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import {
     Divider,
@@ -15,10 +16,12 @@ import {
 import firebase from "firebase";
 import {
     AuthAction,
+    useAuthUser,
     withAuthUser,
     withAuthUserTokenSSR,
 } from "next-firebase-auth";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 const args = {
     title: "Kaffeekasse für alle Mitarbeiter",
@@ -48,6 +51,16 @@ const args = {
 };
 
 const Index = () => {
+    // Checking if the User is authenticated and
+    // allowed to use the application. We check this by the
+    // provided E-Mail Domain and the allowed Organisation Domain
+    const { firebaseUser } = useAuthUser();
+    // Providing the Router for redirecting to the login page
+    // `next-firebase-auth` would redirect as well but we want to redirect
+    // with a query parameter so we can show an error message
+    const router = useRouter();
+    AuthorizeUsersOrganisation({ email: firebaseUser?.email, router });
+
     // We're using 1 column on the `sm` breakpoint instead of `minChildWidth`
     // That's because otherwise the Cards would stick to 400px width and overflow
     // To prevent that we're removing the `minChildWidth` prop on the `sm` breakpoint
