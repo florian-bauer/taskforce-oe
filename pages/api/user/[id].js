@@ -3,6 +3,6 @@ import { getUser } from "@/lib/user";
 export default async (req, res) => {
     const { id } = req.query;
 
-    const user = await getUser({ id });
-    res.send({ user });
+    const { _id, ...user } = await getUser({ id });
+    res.send({ id: _id, ...user });
 };
