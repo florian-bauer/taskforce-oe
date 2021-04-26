@@ -6,6 +6,7 @@
         "hooks",
         "pages",
         "lib",
-        "auth"
+        "auth",
+        "db"
     ]
 }
