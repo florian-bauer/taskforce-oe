@@ -19,7 +19,12 @@ export default async (req, res) => {
             picture: claims.picture,
         };
 
-        await refreshUser({ user });
+        const UserDomain = email.split("@")[1].toUpperCase();
+        const AllowedDomain = `${process.env.NEXT_PUBLIC_ALLOW_AUTH_DOMAIN}`.toUpperCase();
+
+        if (UserDomain === AllowedDomain) {
+            await refreshUser({ user });
+        }
     } catch (error) {
         return res.status(500).json({ error });
     }
