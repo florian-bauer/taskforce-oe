@@ -61,6 +61,8 @@ const Index = () => {
     const router = useRouter();
     AuthorizeUsersOrganisation({ email: firebaseUser?.email, router });
 
+    if (!firebaseUser?.email) return <></>;
+
     // We're using 1 column on the `sm` breakpoint instead of `minChildWidth`
     // That's because otherwise the Cards would stick to 400px width and overflow
     // To prevent that we're removing the `minChildWidth` prop on the `sm` breakpoint
