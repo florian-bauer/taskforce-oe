@@ -61,8 +61,6 @@ const Index = () => {
     const router = useRouter();
     AuthorizeUsersOrganisation({ email: firebaseUser?.email, router });
 
-    if (!firebaseUser?.email) return <></>;
-
     // We're using 1 column on the `sm` breakpoint instead of `minChildWidth`
     // That's because otherwise the Cards would stick to 400px width and overflow
     // To prevent that we're removing the `minChildWidth` prop on the `sm` breakpoint
@@ -73,6 +71,9 @@ const Index = () => {
     });
 
     const onSignOut = async () => await firebase.auth().signOut();
+
+    // Don't render content until the users email is received
+    if (!firebaseUser?.email) return <></>;
 
     return (
         <>
