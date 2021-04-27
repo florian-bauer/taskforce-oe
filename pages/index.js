@@ -72,6 +72,9 @@ const Index = () => {
 
     const onSignOut = async () => await firebase.auth().signOut();
 
+    // Don't render content until the users email is received
+    if (!firebaseUser?.email) return <></>;
+
     return (
         <>
             <Head>
