@@ -1,5 +1,6 @@
 import { Button } from "@/components/button";
 import { Filter } from "@/components/filter";
+import { CardController } from "@/controller/card-controller";
 import { CreateTaskModal } from "@/controller/create-task-modal";
 import { AuthorizeUsersOrganisation } from "@/lib/auth/provider";
 import { ChevronRightIcon } from "@chakra-ui/icons";
@@ -20,12 +21,13 @@ import {
 } from "next-firebase-auth";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useState, Children } from "react";
 
 const Index = () => {
     // Checking if the User is authenticated and
     // allowed to use the application. We check this by the
     // provided E-Mail Domain and the allowed Organisation Domain
-    const { firebaseUser } = useAuthUser();
+    const { firebaseUser, getIdToken } = useAuthUser();
     // Providing the Router for redirecting to the login page
     // `next-firebase-auth` would redirect as well but we want to redirect
     // with a query parameter so we can show an error message
@@ -42,6 +44,30 @@ const Index = () => {
     });
 
     const onSignOut = async () => await firebase.auth().signOut();
+
+    // Fetching all Tasks and storing them into the State once they're fetched
+    const [tasks, setTasks] = useState(null);
+
+    const getTasks = async () => {
+        const token = await getIdToken();
+        if (!token) return;
+
+        // TODO(developer): Replace `http://localhost:3000` with dynamic host
+        const response = await fetch("http://localhost:3000/api/tasks", {
+            method: "GET",
+            headers: {
+                authorization: token,
+            },
+        });
+
+        const data = await response.json();
+        if (!data) return;
+        setTasks(data.tasks);
+    };
+
+    if (!tasks) {
+        getTasks();
+    }
 
     return (
         <>
@@ -86,6 +112,11 @@ const Index = () => {
                     <Flex flexDir="column" px={6} pb={6}>
                         <Divider />
                         <SimpleGrid {...SimpleGridProps} spacing={6} mt={6}>
+                            {Children.toArray(
+                                tasks?.map((task) => (
+                                    <CardController {...task} />
+                                ))
+                            )}
                             <CreateTaskModal />
                         </SimpleGrid>
                     </Flex>
