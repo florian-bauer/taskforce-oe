@@ -22,6 +22,7 @@ const FormModal = ({
     labelAbort,
     labelAction,
     onAction,
+    disabled,
 }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -56,6 +57,7 @@ const FormModal = ({
                     <ModalFooter>
                         <Button onClick={onClose} mr={3} label={labelAbort} />
                         <Button
+                            disabled={disabled}
                             onClick={() => onAction(onClose)}
                             primary
                             label={labelAction}
@@ -79,6 +81,11 @@ FormModal.propTypes = {
     labelAbort: PropTypes.string.isRequired,
     labelAction: PropTypes.string.isRequired,
     onAction: PropTypes.func.isRequired,
+    disabled: PropTypes.bool,
+};
+
+FormModal.defaultProps = {
+    disabled: false,
 };
 
 export { FormModal };
