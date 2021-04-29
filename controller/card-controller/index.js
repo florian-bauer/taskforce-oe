@@ -1,5 +1,9 @@
 import { Card } from "@/components/card";
-import { getAuthor, getParticipants } from "@/controller/card-controller/lib";
+import {
+    getAuthor,
+    getParticipants,
+    isUserAdministrator,
+} from "@/controller/card-controller/lib";
 import { useAuthUser } from "next-firebase-auth";
 import { useState } from "react";
 
@@ -11,6 +15,15 @@ const CardController = ({
     participants: rawParticipants,
 }) => {
     const { id } = useAuthUser();
+    const [administrator, setAdministrator] = useState(null);
+
+    if (!administrator) {
+        isUserAdministrator({
+            uid: id,
+            onResponse: ({ data }) => setAdministrator(data),
+        });
+    }
+
     const [author, setAuthor] = useState(null);
     const [participants, setParticipants] = useState(null);
 
@@ -41,7 +54,7 @@ const CardController = ({
             participants={participants || []}
             is={{
                 owner: createdBy === id,
-                administrator: false,
+                administrator: administrator || false,
             }}
         />
     );

@@ -8,6 +8,15 @@ const getAuthor = async ({ uid, onResponse }) => {
     onResponse({ data });
 };
 
+const isUserAdministrator = async ({ uid, onResponse }) => {
+    const data = await getUser({ uid });
+    if (data.administrator) {
+        return onResponse({ data: data.administrator });
+    }
+
+    return onResponse({ data: false });
+};
+
 const getParticipants = async ({ rawParticipants, onResponse }) => {
     const participants = [];
 
@@ -22,4 +31,4 @@ const getParticipants = async ({ rawParticipants, onResponse }) => {
     onResponse({ data: participants });
 };
 
-export { getAuthor, getParticipants };
+export { getAuthor, getParticipants, isUserAdministrator };
