@@ -30,6 +30,19 @@ it("renders correctly", () => {
             administrator: true,
         },
         status: "voting",
+        events: {
+            onVoteAdd: () => console.log("Add Vote"),
+            onVoteRemove: () => console.log("Remove Vote"),
+            onParticipantAdd: () => console.log("Add Participant"),
+            onParticipantRemove: () => console.log("Remove Participant"),
+            onShowParticipants: () => console.log("Show All Participants"),
+            onChangeStatus: () => console.log("Open Modal for Changing Status"),
+            onEdit: () => console.log("Open Modal for Editing"),
+            onDelete: () => console.log("Open Delete Confirm Modal"),
+            onPermanentDelete: () =>
+                console.log("Open Permanent Delete Confirm Modal"),
+            onRestore: () => console.log("Restore Task"),
+        },
     };
 
     const { queryByText } = render(
