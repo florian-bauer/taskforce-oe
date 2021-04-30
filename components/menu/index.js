@@ -19,8 +19,12 @@ const Menu = ({ list }) => (
         />
         <MenuList>
             {Children.toArray(
-                list.map(({ label, icon, color }) => (
-                    <MenuItem icon={icon} color={color && color}>
+                list.map(({ label, icon, onClick, color }) => (
+                    <MenuItem
+                        icon={icon}
+                        color={color && color}
+                        onClick={onClick}
+                    >
                         {label}
                     </MenuItem>
                 ))
@@ -35,6 +39,7 @@ Menu.propTypes = {
             label: PropTypes.string.isRequired,
             icon: PropTypes.node.isRequired,
             color: PropTypes.string,
+            onClick: PropTypes.func.isRequired,
         })
     ),
 };

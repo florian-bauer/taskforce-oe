@@ -6,16 +6,38 @@ import {
 import { Wrapper } from "@/components/card/CardFooter/wrapper";
 import { Menu } from "@/components/menu";
 import { DELETED, FINISHED, PROGRESS, VOTING } from "@/constants/status";
+import {
+    VoteButton,
+    ParticipantButton,
+} from "@/components/card/CardFooter/buttons";
 
-const CardFooter = ({ status, is, ...props }) => {
+/**
+ * TODO(developer):
+ *  - [ ] Capsulate Vote Buttons and different Menu Entries in Components
+ *  - [ ] Add both Variants of the Vote and Participant Buttons
+ *  - [ ] Fire the Events
+ *
+ */
+
+const CardFooter = ({ status, is, events, ...props }) => {
     if (status === VOTING) {
         return (
             <Wrapper {...props}>
-                <Button label="Vote hinzufügen" primary w="100%" />
-                <Button label="Als Helfer:in eintragen" primary w="100%" />
-                {is.administrator && <Menu list={VotingAdminList} />}
+                <VoteButton
+                    isVoter={is.voter}
+                    onVoteAdd={events.onVoteAdd}
+                    onVoteRemove={events.onVoteRemove}
+                />
+                <ParticipantButton
+                    isParticipant={is.participant}
+                    onParticipantAdd={events.onParticipantAdd}
+                    onParticipantRemove={events.onParticipantRemove}
+                />
+                {is.administrator && (
+                    <Menu list={VotingAdminList({ events })} />
+                )}
                 {is.owner && !is.administrator && (
-                    <Menu list={VotingOwnerList} />
+                    <Menu list={VotingOwnerList({ events })} />
                 )}
             </Wrapper>
         );
@@ -27,9 +49,19 @@ const CardFooter = ({ status, is, ...props }) => {
     if (status === PROGRESS) {
         return (
             <Wrapper {...props}>
-                <Button label="Helfer:innen anzeigen" primary w="100%" />
+                <Button
+                    label="Helfer:innen anzeigen"
+                    onClick={events.onShowParticipants}
+                    primary
+                    w="100%"
+                />
                 {is.administrator && (
-                    <Button label="Status ändern" primary w="100%" />
+                    <Button
+                        label="Status ändern"
+                        onClick={events.onChangeStatus}
+                        primary
+                        w="100%"
+                    />
                 )}
             </Wrapper>
         );
@@ -38,9 +70,15 @@ const CardFooter = ({ status, is, ...props }) => {
     if (status === DELETED) {
         return (
             <Wrapper {...props}>
-                <Button label="Wiederherstellen" primary w="100%" />
+                <Button
+                    label="Wiederherstellen"
+                    onClick={events.onRestore}
+                    primary
+                    w="100%"
+                />
                 <Button
                     label="Endgültig löschen"
+                    onClick={events.onPermanentDelete}
                     background="red.500"
                     _hover={{ bg: "red.400" }}
                     _active={{ bg: "red.300" }}
@@ -58,9 +96,15 @@ const CardFooter = ({ status, is, ...props }) => {
     if (status === FINISHED) {
         return (
             <Wrapper {...props}>
-                <Button label="Status ändern" primary w="100%" />
+                <Button
+                    label="Status ändern"
+                    onClick={events.onChangeStatus}
+                    primary
+                    w="100%"
+                />
                 <Button
                     label="Löschen"
+                    onClick={events.onDelete}
                     background="red.500"
                     _hover={{ bg: "red.400" }}
                     _active={{ bg: "red.300" }}

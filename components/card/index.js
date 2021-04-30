@@ -16,6 +16,7 @@ const Card = ({
     description,
     status,
     is,
+    events,
     ...props
 }) => {
     // Users (non-owners & non-admins) should not be able to see the card when it is "deleted"
@@ -60,7 +61,7 @@ const Card = ({
             />
             <Divider borderColor="rgba(0, 0, 0, .05)" opacity={1} mb={6} />
             <CardBody title={title} description={description} />
-            <CardFooter status={status} is={is} pt={6 + 2} />
+            <CardFooter status={status} is={is} events={events} pt={6 + 2} />
         </Flex>
     );
 };
