@@ -3,19 +3,33 @@ import {
     getAuthor,
     getParticipants,
     isUserAdministrator,
+    addVote,
+    removeVote,
 } from "@/controller/card-controller/lib";
 import { useAuthUser } from "next-firebase-auth";
 import { useState } from "react";
 
 const CardController = ({
+    _id: taskId,
     title,
     description,
     status,
     createdBy,
+    votes,
     participants: rawParticipants,
 }) => {
-    const { id } = useAuthUser();
+    const { id, getIdToken } = useAuthUser();
+
+    const [token, setToken] = useState(null);
     const [administrator, setAdministrator] = useState(null);
+    const [author, setAuthor] = useState(null);
+    const [participants, setParticipants] = useState(null);
+    const [isVoter, setIsVoter] = useState(votes.includes(id));
+
+    // Getting the Token that is need for request authorization
+    if (!token) {
+        getIdToken().then((_token) => setToken(_token));
+    }
 
     if (!administrator) {
         isUserAdministrator({
@@ -23,9 +37,6 @@ const CardController = ({
             onResponse: ({ data }) => setAdministrator(data),
         });
     }
-
-    const [author, setAuthor] = useState(null);
-    const [participants, setParticipants] = useState(null);
 
     if (!author) {
         getAuthor({
@@ -55,12 +66,24 @@ const CardController = ({
             is={{
                 owner: createdBy === id,
                 administrator: administrator || false,
-                voter: true,
+                voter: isVoter,
                 participant: true,
             }}
             events={{
-                onVoteAdd: () => console.log("Add Vote"),
-                onVoteRemove: () => console.log("Remove Vote"),
+                onVoteAdd: () => {
+                    addVote({
+                        token,
+                        taskId,
+                        onSuccess: () => setIsVoter(true),
+                    });
+                },
+                onVoteRemove: () => {
+                    removeVote({
+                        token,
+                        taskId,
+                        onSuccess: () => setIsVoter(false),
+                    });
+                },
                 onParticipantAdd: () => console.log("Add Participant"),
                 onParticipantRemove: () => console.log("Remove Participant"),
                 onShowParticipants: () => console.log("Show All Participants"),
