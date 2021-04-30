@@ -1,9 +1,11 @@
 import { Card } from "@/components/card";
 import {
+    addParticipant,
+    addVote,
     getAuthor,
     getParticipants,
     isUserAdministrator,
-    addVote,
+    removeParticipant,
     removeVote,
 } from "@/controller/card-controller/lib";
 import { useAuthUser } from "next-firebase-auth";
@@ -25,6 +27,9 @@ const CardController = ({
     const [author, setAuthor] = useState(null);
     const [participants, setParticipants] = useState(null);
     const [isVoter, setIsVoter] = useState(votes.includes(id));
+    const [isParticipant, setIsParticipant] = useState(
+        rawParticipants.includes(id)
+    );
 
     // Getting the Token that is need for request authorization
     if (!token) {
@@ -67,7 +72,7 @@ const CardController = ({
                 owner: createdBy === id,
                 administrator: administrator || false,
                 voter: isVoter,
-                participant: true,
+                participant: isParticipant,
             }}
             events={{
                 onVoteAdd: () => {
@@ -84,8 +89,20 @@ const CardController = ({
                         onSuccess: () => setIsVoter(false),
                     });
                 },
-                onParticipantAdd: () => console.log("Add Participant"),
-                onParticipantRemove: () => console.log("Remove Participant"),
+                onParticipantAdd: () => {
+                    addParticipant({
+                        token,
+                        taskId,
+                        onSuccess: () => setIsParticipant(true),
+                    });
+                },
+                onParticipantRemove: () => {
+                    removeParticipant({
+                        token,
+                        taskId,
+                        onSuccess: () => setIsParticipant(false),
+                    });
+                },
                 onShowParticipants: () => console.log("Show All Participants"),
                 onChangeStatus: () =>
                     console.log("Open Modal for Changing Status"),

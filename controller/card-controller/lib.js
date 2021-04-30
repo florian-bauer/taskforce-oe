@@ -65,4 +65,46 @@ const removeVote = async ({ token, taskId, onSuccess }) => {
     }
 };
 
-export { getAuthor, getParticipants, isUserAdministrator, addVote, removeVote };
+const addParticipant = async ({ token, taskId, onSuccess }) => {
+    if (!token || !taskId) return;
+
+    const response = await fetch(`/api/tasks/participants/${taskId}/add`, {
+        method: "POST",
+        headers: {
+            authorization: token,
+        },
+    });
+
+    const data = await response.json();
+
+    if (data?.success) {
+        onSuccess();
+    }
+};
+
+const removeParticipant = async ({ token, taskId, onSuccess }) => {
+    if (!token || !taskId) return;
+
+    const response = await fetch(`/api/tasks/participants/${taskId}/remove`, {
+        method: "POST",
+        headers: {
+            authorization: token,
+        },
+    });
+
+    const data = await response.json();
+
+    if (data?.success) {
+        onSuccess();
+    }
+};
+
+export {
+    getAuthor,
+    getParticipants,
+    isUserAdministrator,
+    addVote,
+    removeVote,
+    addParticipant,
+    removeParticipant,
+};
