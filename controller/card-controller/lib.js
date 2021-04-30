@@ -31,10 +31,10 @@ const getParticipants = async ({ rawParticipants, onResponse }) => {
     onResponse({ data: participants });
 };
 
-const addVote = async ({ token, taskId, onSuccess }) => {
+const action = async ({ token, taskId, onSuccess, section, action }) => {
     if (!token || !taskId) return;
 
-    const response = await fetch(`/api/tasks/votes/${taskId}/add`, {
+    const response = await fetch(`/api/tasks/${section}/${taskId}/${action}`, {
         method: "POST",
         headers: {
             authorization: token,
@@ -46,57 +46,46 @@ const addVote = async ({ token, taskId, onSuccess }) => {
     if (data?.success) {
         onSuccess();
     }
+};
+
+const addVote = async ({ token, taskId, onSuccess }) => {
+    await action({
+        token,
+        taskId,
+        onSuccess,
+        section: "votes",
+        action: "add",
+    });
 };
 
 const removeVote = async ({ token, taskId, onSuccess }) => {
-    if (!token || !taskId) return;
-
-    const response = await fetch(`/api/tasks/votes/${taskId}/remove`, {
-        method: "POST",
-        headers: {
-            authorization: token,
-        },
+    await action({
+        token,
+        taskId,
+        onSuccess,
+        section: "votes",
+        action: "remove",
     });
-
-    const data = await response.json();
-
-    if (data?.success) {
-        onSuccess();
-    }
 };
 
 const addParticipant = async ({ token, taskId, onSuccess }) => {
-    if (!token || !taskId) return;
-
-    const response = await fetch(`/api/tasks/participants/${taskId}/add`, {
-        method: "POST",
-        headers: {
-            authorization: token,
-        },
+    await action({
+        token,
+        taskId,
+        onSuccess,
+        section: "participants",
+        action: "add",
     });
-
-    const data = await response.json();
-
-    if (data?.success) {
-        onSuccess();
-    }
 };
 
 const removeParticipant = async ({ token, taskId, onSuccess }) => {
-    if (!token || !taskId) return;
-
-    const response = await fetch(`/api/tasks/participants/${taskId}/remove`, {
-        method: "POST",
-        headers: {
-            authorization: token,
-        },
+    await action({
+        token,
+        taskId,
+        onSuccess,
+        section: "participants",
+        action: "remove",
     });
-
-    const data = await response.json();
-
-    if (data?.success) {
-        onSuccess();
-    }
 };
 
 export {
