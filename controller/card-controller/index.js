@@ -93,14 +93,38 @@ const CardController = ({
                     addParticipant({
                         token,
                         taskId,
-                        onSuccess: () => setIsParticipant(true),
+                        onSuccess: () => {
+                            setIsParticipant(true);
+
+                            if (!rawParticipants.includes(id)) {
+                                rawParticipants.push(id);
+                            }
+                            getParticipants({
+                                rawParticipants,
+                                onResponse: ({ data }) => setParticipants(data),
+                            });
+                        },
                     });
                 },
                 onParticipantRemove: () => {
                     removeParticipant({
                         token,
                         taskId,
-                        onSuccess: () => setIsParticipant(false),
+                        onSuccess: () => {
+                            setIsParticipant(false);
+
+                            if (rawParticipants.includes(id)) {
+                                const newRawParticipants = rawParticipants.filter(
+                                    (_id) => _id !== id
+                                );
+                                rawParticipants = newRawParticipants;
+                            }
+
+                            getParticipants({
+                                rawParticipants,
+                                onResponse: ({ data }) => setParticipants(data),
+                            });
+                        },
                     });
                 },
                 onShowParticipants: () => console.log("Show All Participants"),
