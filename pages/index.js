@@ -21,7 +21,9 @@ import {
 } from "next-firebase-auth";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState, Children } from "react";
+import { Children, useState } from "react";
+import useSWR from "swr";
+import { fetcher } from "@/lib/fetcher";
 
 const Index = () => {
     // Checking if the User is authenticated and
@@ -45,29 +47,14 @@ const Index = () => {
 
     const onSignOut = async () => await firebase.auth().signOut();
 
-    // Fetching all Tasks and storing them into the State once they're fetched
-    const [tasks, setTasks] = useState(null);
+    // TODO(developer):
+    //  - [ ] Create a State for Tasks
+    //  - [ ] Create a `onCreate` Event and return the new task
+    //  - [ ] Insert the Task into the State
 
-    const getTasks = async () => {
-        const token = await getIdToken();
-        if (!token) return;
-
-        // TODO(developer): Replace `http://localhost:3000` with dynamic host
-        const response = await fetch("http://localhost:3000/api/tasks", {
-            method: "GET",
-            headers: {
-                authorization: token,
-            },
-        });
-
-        const data = await response.json();
-        if (!data) return;
-        setTasks(data.tasks);
-    };
-
-    if (!tasks) {
-        getTasks();
-    }
+    const { data } = useSWR("/api/tasks", (url) =>
+        fetcher(url, "GET", getIdToken)
+    );
 
     return (
         <>
@@ -113,7 +100,7 @@ const Index = () => {
                         <Divider />
                         <SimpleGrid {...SimpleGridProps} spacing={6} mt={6}>
                             {Children.toArray(
-                                tasks?.map((task) => (
+                                data?.tasks?.map((task) => (
                                     <CardController {...task} />
                                 ))
                             )}
