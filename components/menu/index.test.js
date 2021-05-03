@@ -4,7 +4,9 @@ import { AtSignIcon } from "@chakra-ui/icons";
 
 it("renders correctly", () => {
     const { queryByText } = render(
-        <Menu list={[{ label: "@", icon: <AtSignIcon /> }]} />
+        <Menu
+            list={[{ label: "@", icon: <AtSignIcon />, onClick: () => {} }]}
+        />
     );
 
     expect(queryByText("@")).toBeTruthy();
