@@ -3,6 +3,7 @@ import { Filter } from "@/components/filter";
 import { CardController } from "@/controller/card-controller";
 import { CreateTaskModal } from "@/controller/create-task-modal";
 import { AuthorizeUsersOrganisation } from "@/lib/auth/provider";
+import { fetcher } from "@/lib/fetcher";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import {
     Divider,
@@ -21,9 +22,8 @@ import {
 } from "next-firebase-auth";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { Children, useState } from "react";
+import { Children, useEffect, useState } from "react";
 import useSWR from "swr";
-import { fetcher } from "@/lib/fetcher";
 
 const Index = () => {
     // Checking if the User is authenticated and
@@ -47,14 +47,15 @@ const Index = () => {
 
     const onSignOut = async () => await firebase.auth().signOut();
 
-    // TODO(developer):
-    //  - [ ] Create a State for Tasks
-    //  - [ ] Create a `onCreate` Event and return the new task
-    //  - [ ] Insert the Task into the State
-
+    // Managing all Tasks
+    const [tasks, setTasks] = useState(null);
     const { data } = useSWR("/api/tasks", (url) =>
         fetcher(url, "GET", getIdToken)
     );
+
+    useEffect(() => {
+        setTasks(data?.tasks);
+    }, [data]);
 
     return (
         <>
@@ -100,11 +101,22 @@ const Index = () => {
                         <Divider />
                         <SimpleGrid {...SimpleGridProps} spacing={6} mt={6}>
                             {Children.toArray(
-                                data?.tasks?.map((task) => (
+                                tasks?.map((task) => (
                                     <CardController {...task} />
                                 ))
                             )}
-                            <CreateTaskModal />
+                            <CreateTaskModal
+                                onCreate={async () => {
+                                    // Refetch on Task Create
+                                    const response = await fetcher(
+                                        "/api/tasks",
+                                        "GET",
+                                        getIdToken
+                                    );
+
+                                    setTasks(response.tasks);
+                                }}
+                            />
                         </SimpleGrid>
                     </Flex>
                 </Flex>

@@ -5,8 +5,9 @@ import { AddIcon } from "@chakra-ui/icons";
 import { useAuthUser } from "next-firebase-auth";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
+import PropTypes from "prop-types";
 
-const CreateTaskModal = () => {
+const CreateTaskModal = ({ onCreate }) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const { getIdToken } = useAuthUser();
@@ -57,6 +58,9 @@ const CreateTaskModal = () => {
                     },
                 });
 
+                // firing the `onCreate` event from the props
+                onCreate();
+
                 return onClose();
             }}
             inputs={[
@@ -74,6 +78,14 @@ const CreateTaskModal = () => {
             }
         />
     );
+};
+
+CreateTaskModal.propTypes = {
+    onCreate: PropTypes.func,
+};
+
+CreateTaskModal.defaultProps = {
+    onCreate: () => {},
 };
 
 export { CreateTaskModal };
