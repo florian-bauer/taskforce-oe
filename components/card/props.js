@@ -30,6 +30,9 @@ export const propTypes = {
         onPermanentDelete: PropTypes.func.isRequired,
         onRestore: PropTypes.func.isRequired,
     }),
+    components: PropTypes.shape({
+        showParticipants: PropTypes.node,
+    }),
 };
 
 export const defaultProps = {

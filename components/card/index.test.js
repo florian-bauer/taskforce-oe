@@ -43,6 +43,9 @@ it("renders correctly", () => {
                 console.log("Open Permanent Delete Confirm Modal"),
             onRestore: () => console.log("Restore Task"),
         },
+        components: {
+            showParticipants: <></>,
+        },
     };
 
     const { queryByText } = render(

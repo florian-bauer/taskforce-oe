@@ -8,8 +8,11 @@ import {
     removeParticipant,
     removeVote,
 } from "@/controller/card-controller/lib";
+import { Flex, Text, Avatar, MenuItem } from "@chakra-ui/react";
+import { ViewIcon } from "@chakra-ui/icons";
 import { useAuthUser } from "next-firebase-auth";
 import { useState } from "react";
+import { TableModal } from "@/components/table-modal";
 
 const CardController = ({
     _id: taskId,
@@ -135,6 +138,52 @@ const CardController = ({
                 onPermanentDelete: () =>
                     console.log("Open Permanent Delete Confirm Modal"),
                 onRestore: () => console.log("Restore Task"),
+            }}
+            components={{
+                showParticipants: (
+                    <TableModal
+                        open={(onOpen) => (
+                            <MenuItem onClick={onOpen} icon={<ViewIcon />}>
+                                Helfer:innen anzeigen
+                            </MenuItem>
+                        )}
+                        header="Eingetragene Helfer"
+                        labelClose="Schließen"
+                        content={{
+                            list: [
+                                {
+                                    name: "John Doe",
+                                    email: "john.doe@example.com",
+                                },
+                                {
+                                    name: "John Doe",
+                                    email: "john.doe@example.com",
+                                },
+                                {
+                                    name: "John Doe",
+                                    email: "john.doe@example.com",
+                                },
+                            ],
+                            body: ({ name, email }) => (
+                                <Flex alignItems="center">
+                                    <Avatar size="md" name={name} src="" />
+                                    <Flex flexDir="column" ml={2}>
+                                        <Text fontSize="md" fontWeight="medium">
+                                            {name}
+                                        </Text>
+                                        <Text
+                                            fontSize="sm"
+                                            fontWeight="normal"
+                                            color="gray.500"
+                                        >
+                                            {email}
+                                        </Text>
+                                    </Flex>
+                                </Flex>
+                            ),
+                        }}
+                    />
+                ),
             }}
         />
     );

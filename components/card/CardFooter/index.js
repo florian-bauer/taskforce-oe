@@ -19,7 +19,7 @@ import {
  *
  */
 
-const CardFooter = ({ status, is, events, ...props }) => {
+const CardFooter = ({ status, is, events, components, ...props }) => {
     if (status === VOTING) {
         return (
             <Wrapper {...props}>
@@ -34,11 +34,14 @@ const CardFooter = ({ status, is, events, ...props }) => {
                     onParticipantRemove={events.onParticipantRemove}
                 />
                 {is.administrator && (
+                    <Menu list={[components.showParticipants]} />
+                )}
+                {/* {is.administrator && (
                     <Menu list={VotingAdminList({ events })} />
-                )}
-                {is.owner && !is.administrator && (
+                )} */}
+                {/* {is.owner && !is.administrator && (
                     <Menu list={VotingOwnerList({ events })} />
-                )}
+                )} */}
             </Wrapper>
         );
     }

@@ -3,7 +3,6 @@ import {
     IconButton,
     Menu as ChakraMenu,
     MenuButton,
-    MenuItem,
     MenuList,
 } from "@chakra-ui/react";
 import PropTypes from "prop-types";
@@ -18,30 +17,13 @@ const Menu = ({ list }) => (
             borderRadius={10}
         />
         <MenuList>
-            {Children.toArray(
-                list.map(({ label, icon, onClick, color }) => (
-                    <MenuItem
-                        icon={icon}
-                        color={color && color}
-                        onClick={onClick}
-                    >
-                        {label}
-                    </MenuItem>
-                ))
-            )}
+            {Children.toArray(list.map((Component) => Component))}
         </MenuList>
     </ChakraMenu>
 );
 
 Menu.propTypes = {
-    list: PropTypes.arrayOf(
-        PropTypes.shape({
-            label: PropTypes.string.isRequired,
-            icon: PropTypes.node.isRequired,
-            color: PropTypes.string,
-            onClick: PropTypes.func.isRequired,
-        })
-    ),
+    list: PropTypes.arrayOf(PropTypes.node.isRequired).isRequired,
 };
 
 export { Menu };
