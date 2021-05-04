@@ -34,14 +34,24 @@ const CardFooter = ({ status, is, events, components, ...props }) => {
                     onParticipantRemove={events.onParticipantRemove}
                 />
                 {is.administrator && (
-                    <Menu list={[components.showParticipants]} />
+                    <Menu
+                        list={[
+                            components.showParticipants,
+                            components.changeStatus,
+                            components.edit,
+                            components.delete,
+                        ]}
+                    />
                 )}
-                {/* {is.administrator && (
-                    <Menu list={VotingAdminList({ events })} />
-                )} */}
-                {/* {is.owner && !is.administrator && (
-                    <Menu list={VotingOwnerList({ events })} />
-                )} */}
+                {is.owner && !is.administrator && (
+                    <Menu
+                        list={[
+                            components.showParticipants,
+                            components.edit,
+                            components.delete,
+                        ]}
+                    />
+                )}
             </Wrapper>
         );
     }

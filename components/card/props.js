@@ -32,6 +32,9 @@ export const propTypes = {
     }),
     components: PropTypes.shape({
         showParticipants: PropTypes.node,
+        changeStatus: PropTypes.node,
+        edit: PropTypes.node,
+        delete: PropTypes.node,
     }),
 };
 

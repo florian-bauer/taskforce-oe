@@ -45,6 +45,139 @@ const _args = {
             console.log("Open Permanent Delete Confirm Modal"),
         onRestore: () => console.log("Restore Task"),
     },
+    components: {
+        showParticipants: (
+            <TableModal
+                open={(onOpen) => (
+                    <MenuItem onClick={onOpen} icon={<ViewIcon />}>
+                        Helfer:innen anzeigen
+                    </MenuItem>
+                )}
+                header="Eingetragene Helfer"
+                labelClose="Schließen"
+                content={{
+                    list: [
+                        {
+                            name: "John Doe",
+                            email: "john.doe@example.com",
+                        },
+                        {
+                            name: "John Doe",
+                            email: "john.doe@example.com",
+                        },
+                        {
+                            name: "John Doe",
+                            email: "john.doe@example.com",
+                        },
+                    ],
+                    body: ({ name, email }) => (
+                        <Flex alignItems="center">
+                            <Avatar size="md" name={name} src="" />
+                            <Flex flexDir="column" ml={2}>
+                                <Text fontSize="md" fontWeight="medium">
+                                    {name}
+                                </Text>
+                                <Text
+                                    fontSize="sm"
+                                    fontWeight="normal"
+                                    color="gray.500"
+                                >
+                                    {email}
+                                </Text>
+                            </Flex>
+                        </Flex>
+                    ),
+                }}
+            />
+        ),
+        changeStatus: (
+            <ActionModal
+                open={(onOpen) => (
+                    <MenuItem onClick={onOpen} icon={<WarningIcon />}>
+                        Status bearbeiten
+                    </MenuItem>
+                )}
+                header="Status bearbeiten"
+                body={
+                    <Filter
+                        collection={[
+                            {
+                                label: "Voting",
+                                color: "purple",
+                            },
+                            {
+                                label: "In Arbeit",
+                                color: "orange",
+                            },
+                            {
+                                label: "Abgearbeitet",
+                                color: "green",
+                            },
+                        ]}
+                        onChange={console.log}
+                        name="Status"
+                        defaultValue="Voting"
+                        direction="column"
+                    />
+                }
+                labelAbort="Abbrechen"
+                labelAction="Änderungen übernehmen"
+                onAction={(onClose) => {
+                    onClose();
+                    console.log("Change Status");
+                }}
+            />
+        ),
+        edit: (
+            <FormModal
+                open={(onOpen) => (
+                    <MenuItem onClick={onOpen} icon={<EditIcon />}>
+                        Vorschlag bearbeiten
+                    </MenuItem>
+                )}
+                header="Änderungen übernehmen"
+                labelAbort="Abbrechen"
+                labelAction="Vorschlag bearbeiten"
+                onAction={() => {
+                    console.log("on action");
+                }}
+                inputs={[
+                    {
+                        label: "Titel",
+                        onChange: (event) => setTitle(event.target.value),
+                    },
+                    {
+                        label: "Beschreibung",
+                        onChange: (event) => setDescription(event.target.value),
+                    },
+                ]}
+                disabled={
+                    title.trim().length <= 0 || description.trim().length <= 0
+                }
+            />
+        ),
+        delete: (
+            <ActionModal
+                open={(onOpen) => (
+                    <MenuItem
+                        onClick={onOpen}
+                        color="red"
+                        icon={<DeleteIcon />}
+                    >
+                        Vorschlag löschen
+                    </MenuItem>
+                )}
+                header="Bist du dir sicher?"
+                body="Möchtest du den Vorschlag wirklich löschen?"
+                labelAction="Ja, Vorschlag löschen"
+                labelAbort="Nein, Vorschlag behalten"
+                onAction={(onClose) => {
+                    onClose();
+                    console.log("Delete");
+                }}
+            />
+        ),
+    },
 };
 
 export const Voting = Template.bind({});

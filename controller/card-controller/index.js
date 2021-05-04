@@ -9,10 +9,13 @@ import {
     removeVote,
 } from "@/controller/card-controller/lib";
 import { Flex, Text, Avatar, MenuItem } from "@chakra-ui/react";
-import { ViewIcon } from "@chakra-ui/icons";
+import { DeleteIcon, EditIcon, ViewIcon, WarningIcon } from "@chakra-ui/icons";
 import { useAuthUser } from "next-firebase-auth";
 import { useState } from "react";
 import { TableModal } from "@/components/table-modal";
+import { ActionModal } from "@/components/action-modal";
+import { FormModal } from "@/components/form-modal";
+import { Filter } from "@/components/filter";
 
 const CardController = ({
     _id: taskId,
@@ -181,6 +184,96 @@ const CardController = ({
                                     </Flex>
                                 </Flex>
                             ),
+                        }}
+                    />
+                ),
+                changeStatus: (
+                    <ActionModal
+                        open={(onOpen) => (
+                            <MenuItem onClick={onOpen} icon={<WarningIcon />}>
+                                Status bearbeiten
+                            </MenuItem>
+                        )}
+                        header="Status bearbeiten"
+                        body={
+                            <Filter
+                                collection={[
+                                    {
+                                        label: "Voting",
+                                        color: "purple",
+                                    },
+                                    {
+                                        label: "In Arbeit",
+                                        color: "orange",
+                                    },
+                                    {
+                                        label: "Abgearbeitet",
+                                        color: "green",
+                                    },
+                                ]}
+                                onChange={console.log}
+                                name="Status"
+                                defaultValue="Voting"
+                                direction="column"
+                            />
+                        }
+                        labelAbort="Abbrechen"
+                        labelAction="Änderungen übernehmen"
+                        onAction={(onClose) => {
+                            onClose();
+                            console.log("Change Status");
+                        }}
+                    />
+                ),
+                edit: (
+                    <FormModal
+                        open={(onOpen) => (
+                            <MenuItem onClick={onOpen} icon={<EditIcon />}>
+                                Vorschlag bearbeiten
+                            </MenuItem>
+                        )}
+                        header="Änderungen übernehmen"
+                        labelAbort="Abbrechen"
+                        labelAction="Vorschlag bearbeiten"
+                        onAction={() => {
+                            console.log("on action");
+                        }}
+                        inputs={[
+                            {
+                                label: "Titel",
+                                onChange: (event) =>
+                                    setTitle(event.target.value),
+                            },
+                            {
+                                label: "Beschreibung",
+                                onChange: (event) =>
+                                    setDescription(event.target.value),
+                            },
+                        ]}
+                        disabled={
+                            title.trim().length <= 0 ||
+                            description.trim().length <= 0
+                        }
+                    />
+                ),
+                delete: (
+                    <ActionModal
+                        open={(onOpen) => (
+                            <MenuItem
+                                onClick={onOpen}
+                                color="red"
+                                icon={<DeleteIcon />}
+                            >
+                                Vorschlag löschen
+                            </MenuItem>
+                        )}
+                        header="Bist du dir sicher?"
+                        body="Möchtest du den Vorschlag wirklich löschen?"
+                        labelAction="Ja, Vorschlag löschen"
+                        labelAbort="Nein, Vorschlag behalten"
+                        onAction={(onClose) => {
+                            onClose();
+                            console.log("Delete");
                         }}
                     />
                 ),
