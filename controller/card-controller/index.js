@@ -16,6 +16,7 @@ import { TableModal } from "@/components/table-modal";
 import { ActionModal } from "@/components/action-modal";
 import { FormModal } from "@/components/form-modal";
 import { Filter } from "@/components/filter";
+import { ShowParticipantsController } from "@/controller/show-participants-controller";
 
 const CardController = ({
     _id: taskId,
@@ -144,48 +145,7 @@ const CardController = ({
             }}
             components={{
                 showParticipants: (
-                    <TableModal
-                        open={(onOpen) => (
-                            <MenuItem onClick={onOpen} icon={<ViewIcon />}>
-                                Helfer:innen anzeigen
-                            </MenuItem>
-                        )}
-                        header="Eingetragene Helfer"
-                        labelClose="Schließen"
-                        content={{
-                            list: [
-                                {
-                                    name: "John Doe",
-                                    email: "john.doe@example.com",
-                                },
-                                {
-                                    name: "John Doe",
-                                    email: "john.doe@example.com",
-                                },
-                                {
-                                    name: "John Doe",
-                                    email: "john.doe@example.com",
-                                },
-                            ],
-                            body: ({ name, email }) => (
-                                <Flex alignItems="center">
-                                    <Avatar size="md" name={name} src="" />
-                                    <Flex flexDir="column" ml={2}>
-                                        <Text fontSize="md" fontWeight="medium">
-                                            {name}
-                                        </Text>
-                                        <Text
-                                            fontSize="sm"
-                                            fontWeight="normal"
-                                            color="gray.500"
-                                        >
-                                            {email}
-                                        </Text>
-                                    </Flex>
-                                </Flex>
-                            ),
-                        }}
-                    />
+                    <ShowParticipantsController participants={participants} />
                 ),
                 changeStatus: (
                     <ActionModal

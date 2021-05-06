@@ -21,10 +21,11 @@ const getParticipants = async ({ rawParticipants, onResponse }) => {
     const participants = [];
 
     for (const participant of rawParticipants) {
-        const { name, picture } = await getUser({ uid: participant });
+        const { name, email, picture } = await getUser({ uid: participant });
         participants.push({
             name,
             avatar: picture,
+            email,
         });
     }
 
