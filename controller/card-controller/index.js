@@ -1,4 +1,6 @@
+import { ActionModal } from "@/components/action-modal";
 import { Card } from "@/components/card";
+import { FormModal } from "@/components/form-modal";
 import {
     addParticipant,
     addVote,
@@ -8,15 +10,12 @@ import {
     removeParticipant,
     removeVote,
 } from "@/controller/card-controller/lib";
-import { Flex, Text, Avatar, MenuItem } from "@chakra-ui/react";
-import { DeleteIcon, EditIcon, ViewIcon, WarningIcon } from "@chakra-ui/icons";
+import { ChangeStatusController } from "@/controller/change-status-controller";
+import { ShowParticipantsController } from "@/controller/show-participants-controller";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { MenuItem } from "@chakra-ui/react";
 import { useAuthUser } from "next-firebase-auth";
 import { useState } from "react";
-import { TableModal } from "@/components/table-modal";
-import { ActionModal } from "@/components/action-modal";
-import { FormModal } from "@/components/form-modal";
-import { Filter } from "@/components/filter";
-import { ShowParticipantsController } from "@/controller/show-participants-controller";
 
 const CardController = ({
     _id: taskId,
@@ -148,41 +147,12 @@ const CardController = ({
                     <ShowParticipantsController participants={participants} />
                 ),
                 changeStatus: (
-                    <ActionModal
-                        open={(onOpen) => (
-                            <MenuItem onClick={onOpen} icon={<WarningIcon />}>
-                                Status bearbeiten
-                            </MenuItem>
-                        )}
-                        header="Status bearbeiten"
-                        body={
-                            <Filter
-                                collection={[
-                                    {
-                                        label: "Voting",
-                                        color: "purple",
-                                    },
-                                    {
-                                        label: "In Arbeit",
-                                        color: "orange",
-                                    },
-                                    {
-                                        label: "Abgearbeitet",
-                                        color: "green",
-                                    },
-                                ]}
-                                onChange={console.log}
-                                name="Status"
-                                defaultValue="Voting"
-                                direction="column"
-                            />
-                        }
-                        labelAbort="Abbrechen"
-                        labelAction="Änderungen übernehmen"
-                        onAction={(onClose) => {
-                            onClose();
-                            console.log("Change Status");
-                        }}
+                    <ChangeStatusController
+                        taskId={taskId}
+                        title={title}
+                        description={description}
+                        token={token}
+                        status={status}
                     />
                 ),
                 edit: (
