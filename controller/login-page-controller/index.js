@@ -16,7 +16,7 @@ const LoginPageController = () => {
     useEffect(() => {
         if (!query) return;
 
-        if (query?.allowed_organisation === "false" && hasToast === false) {
+        if (query?.allowed_organization === "false" && hasToast === false) {
             toast({
                 title: "Unauthorisierter Organisationsaccount",
                 description:
