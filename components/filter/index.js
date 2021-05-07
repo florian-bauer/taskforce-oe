@@ -1,8 +1,8 @@
 import { RadioCard } from "@/components/filter/RadioCard";
-import { Flex, HStack, VStack, useRadioGroup } from "@chakra-ui/react";
+import { useOptions } from "@/hooks";
+import { Flex, HStack, useRadioGroup, VStack } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import { Children } from "react";
-import { useOptions } from "@/hooks";
 
 const Filter = ({
     collection,
