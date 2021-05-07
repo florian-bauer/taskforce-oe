@@ -2,7 +2,7 @@ import { Button } from "@/components/button";
 import { Filter } from "@/components/filter";
 import { CardController } from "@/controller/card-controller";
 import { CreateTaskModal } from "@/controller/create-task-modal";
-import { AuthorizeUsersOrganisation } from "@/lib/auth/provider";
+import { AuthorizeUsersOrganization } from "@/lib/auth/provider";
 import { fetcher } from "@/lib/fetcher";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import {
@@ -34,7 +34,7 @@ const Index = () => {
     // `next-firebase-auth` would redirect as well but we want to redirect
     // with a query parameter so we can show an error message
     const router = useRouter();
-    AuthorizeUsersOrganisation({ email: firebaseUser?.email, router });
+    AuthorizeUsersOrganization({ email: firebaseUser?.email, router });
 
     // We're using 1 column on the `sm` breakpoint instead of `minChildWidth`
     // That's because otherwise the Cards would stick to 400px width and overflow
