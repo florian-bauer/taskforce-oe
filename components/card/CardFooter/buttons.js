@@ -1,4 +1,4 @@
-import { useBoolean } from "@/hooks/useBoolean";
+import { useBoolean } from "@/hooks";
 import { Button } from "@/components/button";
 
 const VoteButton = ({ isVoter, onVoteAdd, onVoteRemove }) => {

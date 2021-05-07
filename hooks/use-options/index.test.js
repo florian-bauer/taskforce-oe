@@ -1,4 +1,4 @@
-import { useOptions } from "@/hooks/useOptions";
+import { useOptions } from "@/hooks";
 
 it("outputs correctly", () => {
     const definite = "b";

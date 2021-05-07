@@ -1,6 +1,6 @@
 import { Button as ChakraButton } from "@chakra-ui/react";
 import PropTypes from "prop-types";
-import { useBoolean } from "@/hooks/useBoolean";
+import { useBoolean } from "@/hooks";
 
 const Button = ({ label, primary, onClick, ...props }) => {
     const { useFlag } = useBoolean(primary);

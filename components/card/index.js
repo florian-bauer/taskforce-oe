@@ -4,8 +4,7 @@ import { CardFooter } from "@/components/card/CardFooter";
 import { CardHeader } from "@/components/card/CardHeader";
 import { defaultProps, propTypes } from "@/components/card/props";
 import { DELETED, FINISHED, PROGRESS, VOTING } from "@/constants/status";
-import { useBoolean } from "@/hooks/useBoolean";
-import { useOptions } from "@/hooks/useOptions";
+import { useBoolean, useOptions } from "@/hooks";
 import { Divider, Flex } from "@chakra-ui/react";
 
 const Card = ({

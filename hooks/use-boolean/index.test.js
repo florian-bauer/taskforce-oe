@@ -1,4 +1,4 @@
-import { useBoolean } from "@/hooks/useBoolean";
+import { useBoolean } from "@/hooks";
 
 it("outputs correctly", () => {
     let condition = true;

@@ -6,6 +6,7 @@ module.exports = {
         "@/components/(.*)": "<rootDir>/components/$1",
         "@/styles/(.*)": "<rootDir>/styles/$1",
         "@/hooks/(.*)": "<rootDir>/hooks/$1",
+        "@/hooks": "<rootDir>/hooks",
         "@/constants/(.*)": "<rootDir>/constants/$1",
         "@/lib/(.*)": "<rootDir>/lib/$1",
         "@/controller/(.*)": "<rootDir>/controller/$1",
