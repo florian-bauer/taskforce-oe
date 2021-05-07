@@ -1,5 +1,5 @@
 import { Button } from "@/components/button";
-import { SignInWithProvider } from "@/lib/auth/provider";
+import { signInWithProvider } from "@/lib/auth/provider";
 import { GoogleIcon } from "@/styles/icons/GoogleIcon";
 import { Flex, Image, Skeleton, useToast } from "@chakra-ui/react";
 import firebase from "firebase";
@@ -33,10 +33,11 @@ const Login = () => {
         }
     }, [_query]);
 
-    const onLogin = async () =>
-        await SignInWithProvider({
+    const onLogin = async () => {
+        await signInWithProvider({
             provider: new firebase.auth.GoogleAuthProvider(),
         });
+    };
 
     return (
         <>
