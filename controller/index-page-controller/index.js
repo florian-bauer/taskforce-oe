@@ -1,40 +1,12 @@
-import { Button } from "@/components/button";
-import { Filter } from "@/components/filter";
-import { CardController } from "@/controller/card-controller";
-import { CreateTaskModal } from "@/controller/create-task-modal";
-import { authorizeUsersOrganization } from "@/lib/auth/provider";
-import { fetcher } from "@/lib/fetcher";
-import { ChevronRightIcon } from "@chakra-ui/icons";
-import {
-    Divider,
-    Flex,
-    Image,
-    SimpleGrid,
-    Skeleton,
-    useBreakpointValue,
-} from "@chakra-ui/react";
-import firebase from "firebase";
-import {
-    AuthAction,
-    setAuthCookies,
-    useAuthUser,
-    withAuthUser,
-    withAuthUserTokenSSR,
-} from "next-firebase-auth";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { Children, useEffect, useState } from "react";
-import useSWR from "swr";
 import { HeaderController } from "@/controller/index-page-controller/header-controller";
 import { authorizeOrganization } from "@/lib/auth/organization";
+import { Flex } from "@chakra-ui/react";
+import { useAuthUser } from "next-firebase-auth";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { FilterController } from "./filter-controller";
+import { GridController } from "./grid-controller";
 
-/**
- * TODO(developer):
- *  - [x] User Authorizen (auch den query param richtig schreiben)
- *  - [x] Sign Out functionallity
- *  - [ ] Task fetching
- *  - [ ] Task Responsiveness
- */
 const IndexPageController = () => {
     const { email, signOut } = useAuthUser();
     const [authorized, setAuthorized] = useState(false);
@@ -63,7 +35,15 @@ const IndexPageController = () => {
     }, [email]);
 
     return (
-        <Flex flexDirection="column">{authorized && <HeaderController />}</Flex>
+        <>
+            {authorized && (
+                <Flex flexDirection="column">
+                    <HeaderController />
+                    <FilterController />
+                    <GridController />
+                </Flex>
+            )}
+        </>
     );
 };
 
