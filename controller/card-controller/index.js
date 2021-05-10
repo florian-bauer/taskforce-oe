@@ -1,5 +1,5 @@
 import { ActionModal } from "@/components/action-modal";
-import { Card } from "@/components/card";
+import { Card } from "@/components/card_old";
 import { FormModal } from "@/components/form-modal";
 import {
     addParticipant,

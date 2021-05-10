@@ -1,4 +1,4 @@
-import { Card } from "@/components/card";
+import { Card } from "@/components/card_old";
 import { render } from "@testing-library/react";
 import { ChakraProvider } from "@chakra-ui/react";
 import Theme from "@/styles/chakra-theme";

@@ -2,14 +2,14 @@ import { Button } from "@/components/button";
 import {
     VotingAdminList,
     VotingOwnerList,
-} from "@/components/card/CardFooter/lists";
-import { Wrapper } from "@/components/card/CardFooter/wrapper";
+} from "@/components/card_old/CardFooter/lists";
+import { Wrapper } from "@/components/card_old/CardFooter/wrapper";
 import { Menu } from "@/components/menu";
 import { DELETED, FINISHED, PROGRESS, VOTING } from "@/constants/status";
 import {
     VoteButton,
     ParticipantButton,
-} from "@/components/card/CardFooter/buttons";
+} from "@/components/card_old/CardFooter/buttons";
 
 /**
  * TODO(developer):

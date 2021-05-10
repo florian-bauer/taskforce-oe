@@ -1,4 +1,4 @@
-import { Card as CardComponent } from "@/components/card";
+import { Card as CardComponent } from "@/components/card_old";
 
 export default {
     title: "Card",
