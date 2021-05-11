@@ -8,7 +8,7 @@ const Participants = ({ participants }) => (
         <AvatarGroup size="md" max={2}>
             {Children.toArray(
                 participants.map(({ name, avatar }) => (
-                    <Avatar name={name} src={avatar} />
+                    <Avatar name={name} src={avatar} userSelect="none" />
                 ))
             )}
         </AvatarGroup>

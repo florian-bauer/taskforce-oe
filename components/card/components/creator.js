@@ -9,7 +9,7 @@ const Creator = ({ name, avatar }) => {
     return (
         <Tooltip label="Ersteller:in">
             <Flex alignItems="center">
-                <Avatar size="md" name={name} src={avatar} />
+                <Avatar size="md" name={name} src={avatar} userSelect="none" />
 
                 {isNameVisible && (
                     <Text
