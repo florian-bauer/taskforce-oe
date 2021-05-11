@@ -9,7 +9,7 @@ import {
     isUserAdministrator,
     removeParticipant,
     removeVote,
-} from "@/controller/card-controller/lib";
+} from "@/controller/card-controller_old/lib";
 import { ChangeStatusController } from "@/controller/change-status-controller";
 import { ShowParticipantsController } from "@/controller/show-participants-controller";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
