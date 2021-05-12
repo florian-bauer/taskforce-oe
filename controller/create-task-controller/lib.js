@@ -1,4 +1,6 @@
-const CreateTask = async ({ title, description, token, onResponse }) => {
+const createTask = async ({ token, title, description }) => {
+    if (!token) return;
+
     const response = await fetch("/api/tasks", {
         method: "POST",
         headers: {
@@ -11,7 +13,7 @@ const CreateTask = async ({ title, description, token, onResponse }) => {
     });
 
     const data = await response.json();
-    onResponse({ data });
+    return { data };
 };
 
-export { CreateTask };
+export { createTask };

@@ -1,7 +1,7 @@
 import { ActionModal } from "@/components/action-modal";
 import { Filter } from "@/components/filter";
 import { FINISHED, PROGRESS, VOTING } from "@/constants/status";
-import { updateStatus } from "@/controller/change-status-controller/lib";
+import { updateStatus } from "@/controller/change-status-controller__old/lib";
 import { useOptions } from "@/hooks";
 import { WarningIcon } from "@chakra-ui/icons";
 import { MenuItem, useToast } from "@chakra-ui/react";

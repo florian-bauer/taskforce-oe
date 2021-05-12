@@ -1,6 +1,8 @@
+import { CardButton } from "@/components/card-button";
 import { CardController } from "@/controller/card-controller";
-import { CreateTaskModal } from "@/controller/create-task-modal";
+import { CreateTaskController } from "@/controller/create-task-controller";
 import { fetcher } from "@/lib/fetcher";
+import { AddIcon } from "@chakra-ui/icons";
 import {
     Divider,
     Flex,
@@ -32,7 +34,14 @@ const GridController = () => {
                     data?.tasks?.map((task) => <CardController data={task} />)
                 )}
 
-                <CreateTaskModal
+                <CreateTaskController
+                    open={(onOpen) => (
+                        <CardButton
+                            label="Vorschlag erstellen"
+                            icon={<AddIcon />}
+                            onClick={onOpen}
+                        />
+                    )}
                     onCreate={async () => await mutate("/api/tasks")}
                 />
             </SimpleGrid>

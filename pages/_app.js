@@ -13,3 +13,8 @@ const App = ({ Component, pageProps }) => (
 );
 
 export default App;
+
+// TODO
+// - [ ] Refactoring (alle Dateien durchgehen)
+// - [ ] ShowParticipantController nur anzeigen wenn auch Participanten vorhanden sind
+// - [ ] Participanten updaten wenn man hinzufügt / entfernt
