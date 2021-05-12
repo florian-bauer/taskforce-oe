@@ -1,3 +1,4 @@
+import { Button } from "@/components/button";
 import { Menu } from "@/components/menu";
 import { DELETED, PROGRESS, VOTING } from "@/constants/status";
 import { ParticipantController } from "@/controller/participant-controller";
@@ -33,7 +34,21 @@ const OwnerActionsController = ({ data }) => {
     }
 
     if (data.status === PROGRESS) {
-        return <>{/* Participanten Liste ansehen */}</>;
+        return (
+            <>
+                <ShowParticipantsController
+                    open={(onOpen) => (
+                        <Button
+                            label="Helfer:innen anzeigen"
+                            onClick={onOpen}
+                            primary
+                            w="100%"
+                        />
+                    )}
+                    participants={data.participants}
+                />
+            </>
+        );
     }
 
     if (data.status === DELETED) {
