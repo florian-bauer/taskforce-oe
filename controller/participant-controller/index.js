@@ -7,7 +7,7 @@ import {
 import { useAuthUser } from "next-firebase-auth";
 import { useState } from "react";
 
-const ParticipantController = ({ taskId, participants }) => {
+const ParticipantController = ({ taskId, participants, mutate }) => {
     const { id: uid, getIdToken } = useAuthUser();
     const [participant, setParticipant] = useState(
         isParticipant({ participants, uid })
@@ -28,6 +28,7 @@ const ParticipantController = ({ taskId, participants }) => {
 
                     if (data?.success) {
                         setParticipant(false);
+                        await mutate("/api/tasks");
                     }
                 }}
             />
@@ -44,6 +45,7 @@ const ParticipantController = ({ taskId, participants }) => {
 
                     if (data?.success) {
                         setParticipant(true);
+                        await mutate("/api/tasks");
                     }
                 }}
             />

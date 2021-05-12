@@ -8,7 +8,7 @@ import { UserActionsController } from "@/controller/card-controller/user-actions
 import { OwnerActionsController } from "@/controller/card-controller/owner-actions-controller";
 import { useEffect, useState } from "react";
 
-const CardController = ({ data }) => {
+const CardController = ({ data, mutate }) => {
     const { status, title, description, createdBy, participants } = data;
 
     const [creator, setCreator] = useState({ name: "", avatar: "" });
@@ -32,8 +32,8 @@ const CardController = ({ data }) => {
             title={title}
             description={description}
         >
-            {/* <UserActionsController data={data} /> */}
-            <OwnerActionsController data={data} />
+            {/* <UserActionsController data={data} mutate={mutate} /> */}
+            <OwnerActionsController data={data} mutate={mutate} />
         </Card>
     );
 };

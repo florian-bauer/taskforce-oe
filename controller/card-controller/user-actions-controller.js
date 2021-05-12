@@ -2,7 +2,7 @@ import { ParticipantController } from "@/controller/participant-controller";
 import { VoteController } from "@/controller/vote-controller";
 import { VOTING } from "@/constants/status";
 
-const UserActionsController = ({ data }) => {
+const UserActionsController = ({ data, mutate }) => {
     if (data.status === VOTING) {
         return (
             <>
@@ -10,6 +10,7 @@ const UserActionsController = ({ data }) => {
                 <ParticipantController
                     taskId={data._id}
                     participants={data.participants}
+                    mutate={mutate}
                 />
             </>
         );

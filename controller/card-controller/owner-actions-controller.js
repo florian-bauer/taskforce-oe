@@ -7,7 +7,7 @@ import { VoteController } from "@/controller/vote-controller";
 import { ViewIcon } from "@chakra-ui/icons";
 import { MenuItem } from "@chakra-ui/menu";
 
-const OwnerActionsController = ({ data }) => {
+const OwnerActionsController = ({ data, mutate }) => {
     if (data.status === VOTING) {
         return (
             <>
@@ -15,6 +15,7 @@ const OwnerActionsController = ({ data }) => {
                 <ParticipantController
                     taskId={data._id}
                     participants={data.participants}
+                    mutate={mutate}
                 />
                 <Menu
                     list={[

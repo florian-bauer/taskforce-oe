@@ -31,7 +31,9 @@ const GridController = () => {
             <Divider />
             <SimpleGrid {...SimpleGridProps} spacing={6} mt={6}>
                 {Children.toArray(
-                    data?.tasks?.map((task) => <CardController data={task} />)
+                    data?.tasks?.map((task) => (
+                        <CardController data={task} mutate={mutate} />
+                    ))
                 )}
 
                 <CreateTaskController

@@ -11,6 +11,10 @@ const ShowParticipantsController = ({ open, participants }) => {
         setData(_participants);
     }, []);
 
+    if (participants.length <= 0) {
+        return <></>;
+    }
+
     return (
         <TableModal
             open={open}
