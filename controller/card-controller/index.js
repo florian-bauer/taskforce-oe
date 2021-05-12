@@ -4,7 +4,8 @@ import {
     getParticipants,
     getUser,
 } from "@/controller/card-controller/lib";
-import { UserActionController } from "@/controller/card-controller/user-actions-controller";
+import { UserActionsController } from "@/controller/card-controller/user-actions-controller";
+import { OwnerActionsController } from "@/controller/card-controller/owner-actions-controller";
 import { useEffect, useState } from "react";
 
 const CardController = ({ data }) => {
@@ -31,7 +32,8 @@ const CardController = ({ data }) => {
             title={title}
             description={description}
         >
-            <UserActionController data={data} />
+            {/* <UserActionsController data={data} /> */}
+            <OwnerActionsController data={data} />
         </Card>
     );
 };

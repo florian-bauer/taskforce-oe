@@ -1,41 +1,33 @@
 import { TableModal } from "@/components/table-modal";
-import { ViewIcon } from "@chakra-ui/icons";
-import { Avatar, Flex, MenuItem, Text } from "@chakra-ui/react";
+import { getParticipants } from "@/controller/show-participants-controller/lib";
+import { ParticipantItemController } from "@/controller/show-participants-controller/participant-item-controller";
+import { useEffect, useState } from "react";
 
-const ShowParticipantsController = ({ participants }) => (
-    <>
-        {participants && (
-            <TableModal
-                open={(onOpen) => (
-                    <MenuItem onClick={onOpen} icon={<ViewIcon />}>
-                        Helfer:innen anzeigen
-                    </MenuItem>
-                )}
-                header="Eingetragene Helfer"
-                labelClose="Schließen"
-                content={{
-                    list: participants,
-                    body: ({ name, email, avatar }) => (
-                        <Flex alignItems="center">
-                            <Avatar size="md" name={name} src={avatar} />
-                            <Flex flexDir="column" ml={2}>
-                                <Text fontSize="md" fontWeight="medium">
-                                    {name}
-                                </Text>
-                                <Text
-                                    fontSize="sm"
-                                    fontWeight="normal"
-                                    color="gray.500"
-                                >
-                                    {email}
-                                </Text>
-                            </Flex>
-                        </Flex>
-                    ),
-                }}
-            />
-        )}
-    </>
-);
+const ShowParticipantsController = ({ open, participants }) => {
+    const [data, setData] = useState([]);
+
+    useEffect(async () => {
+        const _participants = await getParticipants({ participants });
+        setData(_participants);
+    }, []);
+
+    return (
+        <TableModal
+            open={open}
+            header="Eingetragene Helfer:innen"
+            labelClose="Schließen"
+            content={{
+                list: data,
+                body: ({ name, email, avatar }) => (
+                    <ParticipantItemController
+                        name={name}
+                        email={email}
+                        avatar={avatar}
+                    />
+                ),
+            }}
+        />
+    );
+};
 
 export { ShowParticipantsController };
