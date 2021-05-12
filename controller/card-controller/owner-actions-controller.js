@@ -4,6 +4,7 @@ import { DELETED, PROGRESS, VOTING } from "@/constants/status";
 import { ParticipantController } from "@/controller/participant-controller";
 import { ShowParticipantsController } from "@/controller/show-participants-controller";
 import { VoteController } from "@/controller/vote-controller";
+import { ViewIcon } from "@chakra-ui/icons";
 import { MenuItem } from "@chakra-ui/menu";
 
 const OwnerActionsController = ({ data }) => {
@@ -19,7 +20,7 @@ const OwnerActionsController = ({ data }) => {
                     list={[
                         <ShowParticipantsController
                             open={(onOpen) => (
-                                <MenuItem onClick={onOpen}>
+                                <MenuItem onClick={onOpen} icon={<ViewIcon />}>
                                     Helfer:innen anzeigen
                                 </MenuItem>
                             )}
