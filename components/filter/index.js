@@ -35,7 +35,11 @@ const Filter = ({
                             {...getRadioProps({ value: label })}
                             label={label}
                             color={color}
-                            pr={index === array.length - 1 && p}
+                            pr={
+                                direction === "row" &&
+                                index === array.length - 1 &&
+                                p
+                            }
                         />
                     ))
                 )}
