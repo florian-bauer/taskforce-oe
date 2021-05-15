@@ -29,10 +29,12 @@ const TaskFormController = ({
                 {
                     label: "Titel",
                     onChange: (event) => setTitle(event.target.value),
+                    defaultValue: defaultTitle || "",
                 },
                 {
                     label: "Beschreibung",
                     onChange: (event) => setDescription(event.target.value),
+                    defaultValue: defaultDescription || "",
                 },
             ]}
             disabled={

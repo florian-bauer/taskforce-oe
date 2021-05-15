@@ -42,15 +42,18 @@ const FormModal = ({
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         {Children.toArray(
-                            inputs.map(({ label, onChange }, index) => (
-                                <FormControl mt={index !== 0 && 4}>
-                                    <FormLabel>{label}</FormLabel>
-                                    <Input
-                                        placeholder={label}
-                                        onChange={onChange}
-                                    />
-                                </FormControl>
-                            ))
+                            inputs.map(
+                                ({ label, onChange, defaultValue }, index) => (
+                                    <FormControl mt={index !== 0 && 4}>
+                                        <FormLabel>{label}</FormLabel>
+                                        <Input
+                                            placeholder={label}
+                                            onChange={onChange}
+                                            defaultValue={defaultValue}
+                                        />
+                                    </FormControl>
+                                )
+                            )
                         )}
                     </ModalBody>
 
@@ -76,6 +79,7 @@ FormModal.propTypes = {
         PropTypes.shape({
             label: PropTypes.string.isRequired,
             onChange: PropTypes.func,
+            defaultValue: PropTypes.string,
         }).isRequired
     ),
     labelAbort: PropTypes.string.isRequired,
