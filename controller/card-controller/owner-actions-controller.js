@@ -7,6 +7,7 @@ import { ShowParticipantsController } from "@/controller/show-participants-contr
 import { VoteController } from "@/controller/vote-controller";
 import { DeleteIcon, ViewIcon } from "@chakra-ui/icons";
 import { MenuItem } from "@chakra-ui/menu";
+import { RestoreTaskController } from "@/controller/restore-task-controller";
 
 const OwnerActionsController = ({ data, mutate }) => {
     if (data.status === VOTING) {
@@ -71,7 +72,20 @@ const OwnerActionsController = ({ data, mutate }) => {
     if (data.status === DELETED) {
         return (
             <>
-                {/* Wiederherstellen */}
+                <RestoreTaskController
+                    open={(onOpen) => (
+                        <Button
+                            onClick={onOpen}
+                            label="Vorschlag wiederherstellen"
+                            primary
+                            w="100%"
+                        />
+                    )}
+                    taskId={data._id}
+                    mutate={mutate}
+                    title={data.title}
+                    description={data.description}
+                />
                 {/* Endgültig löschen */}
             </>
         );
