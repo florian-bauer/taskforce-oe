@@ -2,12 +2,13 @@ import { Button } from "@/components/button";
 import { Menu } from "@/components/menu";
 import { DELETED, PROGRESS, VOTING } from "@/constants/status";
 import { DeleteTaskController } from "@/controller/delete-task-controller";
+import { FinalDeleteTaskController } from "@/controller/final-delete-task-controller";
 import { ParticipantController } from "@/controller/participant-controller";
+import { RestoreTaskController } from "@/controller/restore-task-controller";
 import { ShowParticipantsController } from "@/controller/show-participants-controller";
 import { VoteController } from "@/controller/vote-controller";
 import { DeleteIcon, ViewIcon } from "@chakra-ui/icons";
 import { MenuItem } from "@chakra-ui/menu";
-import { RestoreTaskController } from "@/controller/restore-task-controller";
 
 const OwnerActionsController = ({ data, mutate }) => {
     if (data.status === VOTING) {
@@ -76,7 +77,7 @@ const OwnerActionsController = ({ data, mutate }) => {
                     open={(onOpen) => (
                         <Button
                             onClick={onOpen}
-                            label="Vorschlag wiederherstellen"
+                            label="Wiederherstellen"
                             primary
                             w="100%"
                         />
@@ -86,7 +87,21 @@ const OwnerActionsController = ({ data, mutate }) => {
                     title={data.title}
                     description={data.description}
                 />
-                {/* Endgültig löschen */}
+                <FinalDeleteTaskController
+                    open={(onOpen) => (
+                        <Button
+                            onClick={onOpen}
+                            label="Endgültig löschen"
+                            primary
+                            w="100%"
+                            background="red.500"
+                            _hover={{ bg: "red.400" }}
+                            _active={{ bg: "red.300" }}
+                        />
+                    )}
+                    taskId={data._id}
+                    mutate={mutate}
+                />
             </>
         );
     }
