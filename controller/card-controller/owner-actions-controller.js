@@ -1,10 +1,11 @@
 import { Button } from "@/components/button";
 import { Menu } from "@/components/menu";
 import { DELETED, PROGRESS, VOTING } from "@/constants/status";
+import { DeleteTaskController } from "@/controller/delete-task-controller";
 import { ParticipantController } from "@/controller/participant-controller";
 import { ShowParticipantsController } from "@/controller/show-participants-controller";
 import { VoteController } from "@/controller/vote-controller";
-import { ViewIcon } from "@chakra-ui/icons";
+import { DeleteIcon, ViewIcon } from "@chakra-ui/icons";
 import { MenuItem } from "@chakra-ui/menu";
 
 const OwnerActionsController = ({ data, mutate }) => {
@@ -27,10 +28,24 @@ const OwnerActionsController = ({ data, mutate }) => {
                             )}
                             participants={data.participants}
                         />,
+                        <DeleteTaskController
+                            open={(onOpen) => (
+                                <MenuItem
+                                    onClick={onOpen}
+                                    icon={<DeleteIcon />}
+                                    color="red"
+                                >
+                                    Vorschlag löschen
+                                </MenuItem>
+                            )}
+                            taskId={data._id}
+                            mutate={mutate}
+                            title={data.title}
+                            description={data.description}
+                        />,
                     ]}
                 />
                 {/* Task bearbeiten */}
-                {/* Task Löschen */}
             </>
         );
     }
