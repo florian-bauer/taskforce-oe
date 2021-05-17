@@ -1,8 +1,8 @@
-import { Button, Heading } from "@chakra-ui/react";
+import { Button as ChakraButton, Heading } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 
 const CardButton = ({ label, icon, ...props }) => (
-    <Button
+    <ChakraButton
         bg="gray.50"
         border="1px solid"
         borderColor="rgba(0, 0, 0, .25)"
@@ -19,7 +19,7 @@ const CardButton = ({ label, icon, ...props }) => (
         <Heading ml={4} fontWeight="semibold" fontSize="18px">
             {label}
         </Heading>
-    </Button>
+    </ChakraButton>
 );
 
 CardButton.propTypes = {

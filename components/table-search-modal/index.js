@@ -1,12 +1,12 @@
 import { ConfirmModal } from "@/components/confirm-modal";
 import {
+    FormControl,
+    Input,
     Table,
     Tbody,
     Td,
     Tr,
     VStack,
-    FormControl,
-    Input,
 } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import { Children, useState } from "react";
@@ -29,8 +29,9 @@ const TableSearchModal = ({ open, header, labelClose, content, filter }) => {
                             onChange={(event) => {
                                 const value = event.target.value;
 
-                                if (value.trim().length <= 0)
+                                if (value.trim().length <= 0) {
                                     return setList(content.list);
+                                }
 
                                 const filtered = filter(value, list);
                                 setList(filtered);

@@ -17,6 +17,7 @@ module.exports = {
             "@/hooks": path.resolve(__dirname, "../hooks"),
             "@/constants": path.resolve(__dirname, "../constants"),
             "@/lib": path.resolve(__dirname, "../lib"),
+            "@/controller": path.resolve(__dirname, "../controller"),
         };
         return {
             ...config,

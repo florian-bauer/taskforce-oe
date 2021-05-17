@@ -14,7 +14,7 @@ export default async (req, res) => {
     }
 
     const { method } = req;
-    const { id: taskId } = req.query;
+    const taskId = req.query.id;
 
     // Validating the HTTP Request Method
     if (!["PUT", "DELETE"].includes(method)) {

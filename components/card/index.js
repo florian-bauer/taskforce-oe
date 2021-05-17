@@ -1,71 +1,46 @@
-import { CardBadge } from "@/components/card/CardBadge";
-import { CardBody } from "@/components/card/CardBody";
-import { CardFooter } from "@/components/card/CardFooter";
-import { CardHeader } from "@/components/card/CardHeader";
-import { defaultProps, propTypes } from "@/components/card/props";
-import { DELETED, FINISHED, PROGRESS, VOTING } from "@/constants/status";
-import { useBoolean } from "@/hooks/useBoolean";
-import { useOptions } from "@/hooks/useOptions";
-import { Divider, Flex } from "@chakra-ui/react";
+import { Badge } from "@/components/card/components/badge";
+import { Body } from "@/components/card/components/body";
+import { Footer } from "@/components/card/components/footer";
+import { Header } from "@/components/card/components/header";
+import { Wrapper } from "@/components/card/components/wrapper";
+import { Divider } from "@chakra-ui/react";
+import PropTypes from "prop-types";
 
 const Card = ({
-    name,
-    avatar,
+    badge,
+    creator,
     participants,
     title,
     description,
-    status,
-    is,
+    children,
     ...props
-}) => {
-    // Users (non-owners & non-admins) should not be able to see the card when it is "deleted"
-    if (!is.owner && !is.administrator && status === DELETED) return <></>;
+}) => (
+    <Wrapper {...props}>
+        <Badge colorScheme={badge.colorScheme}>{badge.label}</Badge>
+        <Header creator={creator} participants={participants} />
+        <Divider borderColor="rgba(0, 0, 0, .05)" opacity={1} my={6} />
+        <Body title={title} description={description} />
+        <Footer>{children}</Footer>
+    </Wrapper>
+);
 
-    const colorScheme = useOptions(status, [
-        { is: VOTING, be: "purple" },
-        { is: PROGRESS, be: "orange" },
-        { is: FINISHED, be: "green" },
-        { is: DELETED, be: "red" },
-    ]);
-
-    const label = useOptions(status, [
-        { is: VOTING, be: "Voting" },
-        { is: PROGRESS, be: "In Arbeit" },
-        { is: FINISHED, be: "Abgeschlossen" },
-        { is: DELETED, be: "Gelöscht" },
-    ]);
-
-    const { useFlag } = useBoolean(is.owner);
-    const borderColor = useFlag(`${colorScheme}.200`, "rgba(0, 0, 0, .05)");
-
-    return (
-        <Flex
-            bg="gray.50"
-            border="1px solid"
-            borderColor={borderColor}
-            borderRadius={10}
-            w="100%"
-            p={6}
-            position="relative"
-            flexDirection="column"
-            boxShadow={is.owner && "lg"}
-            {...props}
-        >
-            <CardBadge colorScheme={colorScheme} label={label} />
-            <CardHeader
-                name={name}
-                avatar={avatar}
-                participants={participants}
-                mb={6}
-            />
-            <Divider borderColor="rgba(0, 0, 0, .05)" opacity={1} mb={6} />
-            <CardBody title={title} description={description} />
-            <CardFooter status={status} is={is} pt={6 + 2} />
-        </Flex>
-    );
+Card.propTypes = {
+    badge: PropTypes.shape({
+        colorScheme: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
+    }).isRequired,
+    creator: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        avatar: PropTypes.string.isRequired,
+    }).isRequired,
+    participants: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            avatar: PropTypes.string.isRequired,
+        }).isRequired
+    ).isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
 };
-
-Card.propTypes = propTypes;
-Card.defaultProps = defaultProps;
 
 export { Card };

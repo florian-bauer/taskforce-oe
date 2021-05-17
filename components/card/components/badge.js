@@ -1,23 +1,22 @@
-import { Badge } from "@chakra-ui/react";
+import { Badge as ChakraBadge } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 
-const CardBadge = ({ colorScheme, label, ...props }) => (
-    <Badge
+const Badge = ({ colorScheme, children }) => (
+    <ChakraBadge
         colorScheme={colorScheme}
         position="absolute"
         top={0}
         right={6}
         transform="translateY(-50%)"
         fontSize="sm"
-        {...props}
+        userSelect="none"
     >
-        {label}
-    </Badge>
+        {children}
+    </ChakraBadge>
 );
 
-CardBadge.propTypes = {
+Badge.propTypes = {
     colorScheme: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
 };
 
-export { CardBadge };
+export { Badge };

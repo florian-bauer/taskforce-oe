@@ -1,8 +1,8 @@
 import { RadioCard } from "@/components/filter/RadioCard";
-import { Flex, HStack, VStack, useRadioGroup } from "@chakra-ui/react";
+import { useOptions } from "@/hooks";
+import { Flex, HStack, useRadioGroup, VStack } from "@chakra-ui/react";
 import PropTypes from "prop-types";
-import { Children } from "react";
-import { useOptions } from "@/hooks/useOptions";
+import { Children, useEffect } from "react";
 
 const Filter = ({
     collection,
@@ -26,6 +26,11 @@ const Filter = ({
         { is: "column", be: VStack },
     ]);
 
+    useEffect(() => {
+        // fire the onChange Event for an init state of the default Value
+        onChange(defaultValue);
+    }, []);
+
     return (
         <Flex overflowY="auto" width="100%" p={p} {...props}>
             <Wrapper {...group} alignItems="stretch" width="100%">
@@ -35,7 +40,11 @@ const Filter = ({
                             {...getRadioProps({ value: label })}
                             label={label}
                             color={color}
-                            pr={index === array.length - 1 && p}
+                            pr={
+                                direction === "row" &&
+                                index === array.length - 1 &&
+                                p
+                            }
                         />
                     ))
                 )}

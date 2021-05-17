@@ -1,8 +1,8 @@
 import { Heading, Text, VStack } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 
-const CardBody = ({ title, description, ...props }) => (
-    <VStack alignItems="flex-start" {...props}>
+const Body = ({ title, description }) => (
+    <VStack alignItems="flex-start">
         <Heading fontWeight="semibold" fontSize="18px">
             {title}
         </Heading>
@@ -10,9 +10,9 @@ const CardBody = ({ title, description, ...props }) => (
     </VStack>
 );
 
-CardBody.propTypes = {
+Body.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
 };
 
-export { CardBody };
+export { Body };

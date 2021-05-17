@@ -1,5 +1,5 @@
 import { Menu as MenuComponent } from "@/components/menu";
-import { DeleteIcon, EditIcon, ViewIcon } from "@chakra-ui/icons";
+import { MenuItem } from "@chakra-ui/react";
 
 export default {
     title: "Menu",
@@ -11,18 +11,9 @@ const Template = (args) => <MenuComponent {...args} />;
 export const Menu = Template.bind({});
 Menu.args = {
     list: [
-        {
-            label: "Helfer anzeigen",
-            icon: <ViewIcon />,
-        },
-        {
-            label: "Bearbeiten",
-            icon: <EditIcon />,
-        },
-        {
-            label: "Löschen",
-            icon: <DeleteIcon />,
-            color: "red",
-        },
+        <MenuItem>Item 1</MenuItem>,
+        <MenuItem>Item 2</MenuItem>,
+        <MenuItem>Item 3</MenuItem>,
+        <MenuItem>Item 4</MenuItem>,
     ],
 };

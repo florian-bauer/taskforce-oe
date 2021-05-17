@@ -1,6 +1,7 @@
 import { initializeAuthentication } from "@/lib/auth";
 import { setAuthCookies, verifyIdToken } from "next-firebase-auth";
 import { refreshUser } from "@/lib/user";
+import { authorizeOrganization } from "@/lib/auth/organization";
 
 initializeAuthentication();
 
@@ -8,6 +9,7 @@ export default async (req, res) => {
     try {
         await setAuthCookies(req, res);
 
+        // Get User Information from the Autorization Token
         const { id, email, claims } = await verifyIdToken(
             req.headers.authorization
         );
@@ -19,10 +21,9 @@ export default async (req, res) => {
             picture: claims.picture,
         };
 
-        const UserDomain = email.split("@")[1].toUpperCase();
-        const AllowedDomain = `${process.env.NEXT_PUBLIC_ALLOW_AUTH_DOMAIN}`.toUpperCase();
+        const authorized = authorizeOrganization({ email });
 
-        if (UserDomain === AllowedDomain) {
+        if (authorized) {
             await refreshUser({ user });
         }
     } catch (error) {
