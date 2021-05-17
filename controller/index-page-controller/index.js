@@ -10,6 +10,7 @@ import { GridController } from "./grid-controller";
 const IndexPageController = () => {
     const { email, signOut } = useAuthUser();
     const [authorized, setAuthorized] = useState(false);
+    const [filterStatus, setFilterStatus] = useState();
     const router = useRouter();
 
     useEffect(() => {
@@ -40,9 +41,9 @@ const IndexPageController = () => {
                 <Flex flexDirection="column">
                     <HeaderController />
                     <FilterController
-                        onChange={({ status }) => console.log(status)}
+                        onChange={({ status }) => setFilterStatus(status)}
                     />
-                    <GridController />
+                    <GridController filterStatus={filterStatus} />
                 </Flex>
             )}
         </>

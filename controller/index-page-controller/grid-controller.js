@@ -1,4 +1,5 @@
 import { CardButton } from "@/components/card-button";
+import { ALL } from "@/constants/status";
 import { CardController } from "@/controller/card-controller";
 import { CreateTaskController } from "@/controller/create-task-controller";
 import { fetcher } from "@/lib/fetcher";
@@ -13,7 +14,7 @@ import { useAuthUser } from "next-firebase-auth";
 import { Children, useState, useEffect } from "react";
 import useSWR from "swr";
 
-const GridController = () => {
+const GridController = ({ filterStatus }) => {
     const [tasks, setTasks] = useState([]);
     const { getIdToken } = useAuthUser();
 
@@ -22,15 +23,22 @@ const GridController = () => {
     );
 
     useEffect(() => {
-        if (!data) return;
+        if (!data || !filterStatus) return;
 
         // Sorting Tasks after Votes (Tasks with most Votes first)
         const sortedTasks = data?.tasks?.sort(
             (a, b) => b.votes.length - a.votes.length
         );
 
-        setTasks(sortedTasks);
-    }, [data]);
+        if (filterStatus === ALL) {
+            return setTasks(sortedTasks);
+        }
+
+        const filteredTasks = sortedTasks?.filter(
+            (task) => task?.status === filterStatus
+        );
+        setTasks(filteredTasks);
+    }, [data, filterStatus]);
 
     // Handling the Grid Responsiveness with different Props on different Breakpoints
     const SimpleGridProps = useBreakpointValue({

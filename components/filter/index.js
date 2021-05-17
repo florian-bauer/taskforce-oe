@@ -2,7 +2,7 @@ import { RadioCard } from "@/components/filter/RadioCard";
 import { useOptions } from "@/hooks";
 import { Flex, HStack, useRadioGroup, VStack } from "@chakra-ui/react";
 import PropTypes from "prop-types";
-import { Children } from "react";
+import { Children, useEffect } from "react";
 
 const Filter = ({
     collection,
@@ -25,6 +25,11 @@ const Filter = ({
         { is: "row", be: HStack },
         { is: "column", be: VStack },
     ]);
+
+    useEffect(() => {
+        // fire the onChange Event for an init state of the default Value
+        onChange(defaultValue);
+    }, []);
 
     return (
         <Flex overflowY="auto" width="100%" p={p} {...props}>
