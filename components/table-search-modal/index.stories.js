@@ -25,8 +25,8 @@ TableSearchModal.args = {
                 email: "florian.bauer@bcm.com",
             },
             {
-                name: "Tim Schmid",
-                email: "tim.schmid@daimler.com",
+                name: "Tommy Morgen",
+                email: "tommy.morgen@asd.com",
             },
         ],
         body: ({ name, email }) => (
