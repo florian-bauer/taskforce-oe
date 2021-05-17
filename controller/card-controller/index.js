@@ -9,6 +9,7 @@ import { OwnerActionsController } from "@/controller/card-controller/actions/own
 import { AdminActionsController } from "@/controller/card-controller/actions/admin-actions-controller";
 import { useEffect, useState } from "react";
 import { useAuthUser } from "next-firebase-auth";
+import { DELETED } from "@/constants/status";
 
 const CardController = ({ data, mutate }) => {
     const { id } = useAuthUser();
@@ -19,6 +20,7 @@ const CardController = ({ data, mutate }) => {
 
     const isOwner = data.createdBy === id;
     const [isAdmin, setIsAdmin] = useState(false);
+    const isUser = !isOwner && !isAdmin;
 
     useEffect(async () => {
         const creatorObject = await getUser({ uid: createdBy });
@@ -32,6 +34,10 @@ const CardController = ({ data, mutate }) => {
     }, []);
 
     const badge = getBadge({ status });
+
+    if (status === DELETED && isUser) {
+        return <></>;
+    }
 
     return (
         <Card
