@@ -26,12 +26,17 @@ const GridController = () => {
         fetcher(url, "GET", getIdToken)
     );
 
+    // Sorting Tasks after Votes (Tasks with most Votes first)
+    const sortedTasks = data?.tasks?.sort(
+        (a, b) => b.votes.length - a.votes.length
+    );
+
     return (
         <Flex flexDir="column" px={6} pb={6}>
             <Divider />
             <SimpleGrid {...SimpleGridProps} spacing={6} mt={6}>
                 {Children.toArray(
-                    data?.tasks?.map((task) => (
+                    sortedTasks?.map((task) => (
                         <CardController data={task} mutate={mutate} />
                     ))
                 )}
