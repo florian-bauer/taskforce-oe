@@ -39,7 +39,9 @@ const IndexPageController = () => {
             {authorized && (
                 <Flex flexDirection="column">
                     <HeaderController />
-                    <FilterController />
+                    <FilterController
+                        onChange={({ status }) => console.log(status)}
+                    />
                     <GridController />
                 </Flex>
             )}
