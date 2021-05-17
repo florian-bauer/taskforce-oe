@@ -8,12 +8,17 @@ import { UserActionsController } from "@/controller/card-controller/actions/user
 import { OwnerActionsController } from "@/controller/card-controller/actions/owner-actions-controller";
 import { AdminActionsController } from "@/controller/card-controller/actions/admin-actions-controller";
 import { useEffect, useState } from "react";
+import { useAuthUser } from "next-firebase-auth";
 
 const CardController = ({ data, mutate }) => {
+    const { id } = useAuthUser();
     const { status, title, description, createdBy, participants } = data;
 
     const [creator, setCreator] = useState({ name: "", avatar: "" });
     const [_participants, setParticipants] = useState([]);
+
+    const isOwner = data.createdBy === id;
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(async () => {
         const creatorObject = await getUser({ uid: createdBy });
@@ -21,6 +26,9 @@ const CardController = ({ data, mutate }) => {
 
         const participantsObject = await getParticipants({ participants });
         setParticipants(participantsObject);
+
+        const currentUser = await getUser({ uid: id });
+        setIsAdmin(currentUser?.administrator || false);
     }, []);
 
     const badge = getBadge({ status });
@@ -33,9 +41,13 @@ const CardController = ({ data, mutate }) => {
             title={title}
             description={description}
         >
-            {/* <UserActionsController data={data} mutate={mutate} /> */}
-            {/* <OwnerActionsController data={data} mutate={mutate} /> */}
-            <AdminActionsController data={data} mutate={mutate} />
+            {isAdmin ? (
+                <AdminActionsController data={data} mutate={mutate} />
+            ) : isOwner ? (
+                <OwnerActionsController data={data} mutate={mutate} />
+            ) : (
+                <UserActionsController data={data} mutate={mutate} />
+            )}
         </Card>
     );
 };
