@@ -26,7 +26,12 @@ it("renders correctly", () => {
     ];
 
     const { queryAllByRole } = render(
-        <Filter name="Status" defaultValue="Alle" collection={collection} />
+        <Filter
+            name="Status"
+            defaultValue="Alle"
+            collection={collection}
+            onChange={(status) => console.log(status)}
+        />
     );
 
     expect(queryAllByRole("radio")).toBeTruthy();
