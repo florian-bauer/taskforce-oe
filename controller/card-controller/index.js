@@ -31,7 +31,9 @@ const CardController = ({ data, mutate }) => {
 
         const currentUser = await getUser({ uid: id });
         setIsAdmin(currentUser?.administrator || false);
-    }, []);
+
+        console.log({ title: data.title, p: data.participants });
+    }, [, data]);
 
     const badge = getBadge({ status });
 
