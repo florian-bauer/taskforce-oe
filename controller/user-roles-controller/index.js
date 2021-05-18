@@ -1,14 +1,16 @@
-import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
-import { MenuItem } from "@chakra-ui/react";
+import { DowngradeController } from "@/controller/user-roles-controller/downgrade-controller";
+import { UpgradeController } from "@/controller/user-roles-controller/upgrade-controller";
 
-const UserRolesController = ({ uid, role }) => {
+const UserRolesController = ({ uid, name, email, role }) => {
     if (role === "user") {
-        return <MenuItem icon={<ArrowUpIcon />}>zu Admin upgraden</MenuItem>;
+        return <UpgradeController uid={uid} name={name} email={email} />;
     }
 
     if (role === "admin") {
-        return <MenuItem icon={<ArrowDownIcon />}>zu User downgraden</MenuItem>;
+        return <DowngradeController uid={uid} name={name} email={email} />;
     }
+
+    return <></>;
 };
 
 export { UserRolesController };

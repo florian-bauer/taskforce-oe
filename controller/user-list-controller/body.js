@@ -26,7 +26,14 @@ const Body = ({ uid, name, email, role }) => (
             {role}
         </Badge>
         <Menu
-            list={[<UserRolesController uid={uid} role={role} />]}
+            list={[
+                <UserRolesController
+                    uid={uid}
+                    name={name}
+                    email={email}
+                    role={role}
+                />,
+            ]}
             menuButtonProps={{
                 background: "gray.900",
                 _hover: { background: "gray.700" },
