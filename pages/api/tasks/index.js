@@ -7,9 +7,13 @@ export default async (req, res) => {
         // Authorize the User
         const { id } = await verifyIdToken(req.headers.authorization);
 
-        if (!id) return res.status(401).json({});
+        if (!id) {
+            console.log("[TASK] no id");
+            return res.status(401).json({});
+        }
         uid = id;
     } catch (error) {
+        console.log("[TASK] error", error);
         return res.status(401).json({});
     }
 
