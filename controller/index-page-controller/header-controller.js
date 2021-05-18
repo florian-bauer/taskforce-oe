@@ -4,7 +4,7 @@ import { ChevronRightIcon } from "@chakra-ui/icons";
 import { Flex, HStack, Image, Skeleton } from "@chakra-ui/react";
 import firebase from "firebase";
 
-const HeaderController = () => (
+const HeaderController = ({ administrator }) => (
     <Flex p={6} alignItems="center" justifyContent="space-between">
         <Image
             src="/Logo.png"
@@ -13,7 +13,7 @@ const HeaderController = () => (
             fallback={<Skeleton width="163px" height="64px" />}
         />
         <HStack>
-            <UserListController />
+            {administrator && <UserListController />}
             <Button
                 label="Log Out"
                 rightIcon={<ChevronRightIcon />}
