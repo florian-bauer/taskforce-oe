@@ -1,8 +1,9 @@
 import { Menu } from "@/components/menu";
 import { getBadgeColor } from "@/controller/user-list-controller/lib";
+import { UserRolesController } from "@/controller/user-roles-controller";
 import { Avatar, Badge, Flex, Grid, Text } from "@chakra-ui/react";
 
-const Body = ({ name, email, role }) => (
+const Body = ({ uid, name, email, role }) => (
     <Grid templateColumns="auto 20% 10%" alignItems="center">
         <Flex w="100%" overflow="hidden">
             <Avatar size="sm" name={name} src="" />
@@ -25,7 +26,7 @@ const Body = ({ name, email, role }) => (
             {role}
         </Badge>
         <Menu
-            list={[]}
+            list={[<UserRolesController uid={uid} role={role} />]}
             menuButtonProps={{
                 background: "gray.900",
                 _hover: { background: "gray.700" },
