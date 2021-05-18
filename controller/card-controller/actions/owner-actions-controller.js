@@ -10,6 +10,7 @@ import { ShowParticipantsController } from "@/controller/show-participants-contr
 import { VoteController } from "@/controller/vote-controller";
 import { DeleteIcon, EditIcon, ViewIcon } from "@chakra-ui/icons";
 import { MenuItem } from "@chakra-ui/menu";
+import { IconButton } from "@chakra-ui/react";
 
 const OwnerActionsController = ({ data, mutate }) => {
     if (data.status === VOTING) {
@@ -21,6 +22,20 @@ const OwnerActionsController = ({ data, mutate }) => {
                     participants={data.participants}
                     mutate={mutate}
                 />
+                <EditTaskController
+                    open={(onOpen) => (
+                        <IconButton
+                            onClick={onOpen}
+                            colorScheme="gray"
+                            aria-label="Vorschlag bearbeiten"
+                            icon={<EditIcon />}
+                        />
+                    )}
+                    mutate={mutate}
+                    taskId={data._id}
+                    title={data.title}
+                    description={data.description}
+                />
                 <Menu
                     list={[
                         <ShowParticipantsController
@@ -30,17 +45,6 @@ const OwnerActionsController = ({ data, mutate }) => {
                                 </MenuItem>
                             )}
                             participants={data.participants}
-                        />,
-                        <EditTaskController
-                            open={(onOpen) => (
-                                <MenuItem onClick={onOpen} icon={<EditIcon />}>
-                                    Vorschlag bearbeiten
-                                </MenuItem>
-                            )}
-                            mutate={mutate}
-                            taskId={data._id}
-                            title={data.title}
-                            description={data.description}
                         />,
                         <DeleteTaskController
                             open={(onOpen) => (
