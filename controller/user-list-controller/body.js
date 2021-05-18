@@ -3,7 +3,7 @@ import { getBadgeColor } from "@/controller/user-list-controller/lib";
 import { UserRolesController } from "@/controller/user-roles-controller";
 import { Avatar, Badge, Flex, Grid, Text } from "@chakra-ui/react";
 
-const Body = ({ uid, name, email, role }) => (
+const Body = ({ uid, name, email, role, mutate }) => (
     <Grid templateColumns="auto 20% 10%" alignItems="center">
         <Flex w="100%" overflow="hidden">
             <Avatar size="sm" name={name} src="" />
@@ -32,6 +32,7 @@ const Body = ({ uid, name, email, role }) => (
                     name={name}
                     email={email}
                     role={role}
+                    mutate={mutate}
                 />,
             ]}
             menuButtonProps={{

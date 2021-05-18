@@ -4,7 +4,7 @@ import { MenuItem } from "@chakra-ui/react";
 import { useAuthUser } from "next-firebase-auth";
 import { useToast } from "@chakra-ui/react";
 
-const UpgradeController = ({ uid, name, email }) => {
+const UpgradeController = ({ uid, name, email, mutate }) => {
     const toast = useToast();
     const { getIdToken } = useAuthUser();
 
@@ -44,6 +44,8 @@ const UpgradeController = ({ uid, name, email }) => {
                         duration: 9000,
                         isClosable: true,
                     });
+
+                    mutate("/api/user");
                 }
             }}
         />

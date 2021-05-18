@@ -3,7 +3,7 @@ import { ArrowDownIcon } from "@chakra-ui/icons";
 import { MenuItem, useToast } from "@chakra-ui/react";
 import { useAuthUser } from "next-firebase-auth";
 
-const DowngradeController = ({ uid, name, email }) => {
+const DowngradeController = ({ uid, name, email, mutate }) => {
     const toast = useToast();
     const { getIdToken } = useAuthUser();
 
@@ -43,6 +43,8 @@ const DowngradeController = ({ uid, name, email }) => {
                         duration: 9000,
                         isClosable: true,
                     });
+
+                    mutate("/api/user");
                 }
             }}
         />
