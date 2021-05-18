@@ -46,6 +46,8 @@ const CardController = ({ data, mutate }) => {
             participants={_participants}
             title={title}
             description={description}
+            boxShadow={isOwner && "lg"}
+            borderColor={isOwner && `${badge.colorScheme}.200`}
         >
             {isAdmin ? (
                 <AdminActionsController data={data} mutate={mutate} />
