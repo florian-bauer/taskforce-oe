@@ -1,27 +1,24 @@
 import { Button } from "@/components/button";
 import { TableSearchModal } from "@/components/table-search-modal";
 import { Body as body } from "@/controller/user-list-controller/body";
-import { filter } from "@/controller/user-list-controller/lib";
+import { filter, getUsers } from "@/controller/user-list-controller/lib";
 import { ViewIcon } from "@chakra-ui/icons";
+import { useState, useEffect } from "react";
 
 const UserListController = () => {
-    const list = [
-        {
-            name: "John Doe",
-            email: "john.doe@example.com",
-            role: "user",
-        },
-        {
-            name: "Florian Bauer",
-            email: "florian.bauer@bcm.com",
-            role: "admin",
-        },
-        {
-            name: "Tommy MorgeTommyAsdTiasdiasdIasOdiAhdnUadshasdasd",
-            email: "tommy.morgen@asd.com",
-            role: "user",
-        },
-    ];
+    const [list, setList] = useState([]);
+
+    useEffect(async () => {
+        const { users } = await getUsers();
+
+        setList(
+            users.map((user) => ({
+                name: user.name,
+                email: user.email,
+                role: user?.administrator ? "admin" : "user",
+            }))
+        );
+    }, []);
 
     return (
         <TableSearchModal

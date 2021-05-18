@@ -2,7 +2,10 @@ const getBadgeColor = ({ role }) => (role === "admin" ? "red" : "blue");
 
 const filter = (searchTerm, list) => {
     const compare = (value) => {
-        return value.toUpperCase().includes(searchTerm.toUpperCase());
+        return value
+            .trim()
+            .toUpperCase()
+            .includes(searchTerm.trim().toUpperCase());
     };
 
     return list.filter(({ name, email, role }) => {
@@ -10,4 +13,10 @@ const filter = (searchTerm, list) => {
     });
 };
 
-export { getBadgeColor, filter };
+const getUsers = async () => {
+    const response = await fetch("/api/user");
+    const users = await response.json();
+    return { users };
+};
+
+export { getBadgeColor, filter, getUsers };

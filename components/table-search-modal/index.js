@@ -9,10 +9,11 @@ import {
     VStack,
 } from "@chakra-ui/react";
 import PropTypes from "prop-types";
-import { Children, useState } from "react";
+import { Children, useState, useEffect } from "react";
 
 const TableSearchModal = ({ open, header, labelClose, content, filter }) => {
-    const [list, setList] = useState(content.list);
+    const [list, setList] = useState([]);
+    useEffect(() => setList(content.list), [content]);
 
     return (
         <ConfirmModal
@@ -33,7 +34,7 @@ const TableSearchModal = ({ open, header, labelClose, content, filter }) => {
                                     return setList(content.list);
                                 }
 
-                                const filtered = filter(value, list);
+                                const filtered = filter(value, content.list);
                                 setList(filtered);
                             }}
                         />
