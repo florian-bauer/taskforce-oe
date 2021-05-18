@@ -21,7 +21,7 @@ const IndexPageController = () => {
         if (user?.administrator) {
             setAdministrator(true);
         }
-    }, []);
+    }, [, id]);
 
     useEffect(() => {
         if (!email) return;

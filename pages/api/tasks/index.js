@@ -1,5 +1,8 @@
+import { initializeAuthentication } from "@/lib/auth";
 import { createTask, getTasks } from "@/lib/tasks";
 import { verifyIdToken } from "next-firebase-auth";
+
+initializeAuthentication();
 
 export default async (req, res) => {
     let uid;
@@ -8,6 +11,7 @@ export default async (req, res) => {
         const { id } = await verifyIdToken(req.headers.authorization);
 
         if (!id) return res.status(401).json({});
+
         uid = id;
     } catch (error) {
         return res.status(401).json({});

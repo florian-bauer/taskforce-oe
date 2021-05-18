@@ -1,5 +1,8 @@
+import { initializeAuthentication } from "@/lib/auth";
 import { getUser, setUserRole } from "@/lib/user";
 import { verifyIdToken } from "next-firebase-auth";
+
+initializeAuthentication();
 
 export default async (req, res) => {
     let uid;
