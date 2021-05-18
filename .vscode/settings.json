@@ -8,6 +8,12 @@
         "lib",
         "auth",
         "db",
-        "controller"
-    ]
+        "controller",
+        "api"
+    ],
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#010202",
+        "titleBar.activeBackground": "#000000",
+        "titleBar.activeForeground": "#e6e6e6"
+    }
 }

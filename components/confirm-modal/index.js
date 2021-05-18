@@ -17,6 +17,7 @@ const ConfirmModal = ({
     body,
     labelConfirm,
     onConfirm,
+    onCloseCustom,
     ...props
 }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -26,7 +27,10 @@ const ConfirmModal = ({
             {open(onOpen)}
             <Modal
                 isCentered
-                onClose={onClose}
+                onClose={() => {
+                    onClose();
+                    onCloseCustom();
+                }}
                 isOpen={isOpen}
                 motionPreset="slideInBottom"
                 scrollBehavior="inside"
@@ -58,10 +62,12 @@ ConfirmModal.propTypes = {
     body: PropTypes.any.isRequired,
     labelConfirm: PropTypes.string.isRequired,
     onConfirm: PropTypes.func,
+    onCloseCustom: PropTypes.func,
 };
 
 ConfirmModal.defaultProps = {
     onConfirm: () => {},
+    onCloseCustom: () => {},
 };
 
 export { ConfirmModal };
