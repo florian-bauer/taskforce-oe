@@ -20,6 +20,7 @@ const TableSearchModal = ({ open, header, labelClose, content, filter }) => {
             open={open}
             header={header}
             labelConfirm={labelClose}
+            onCloseCustom={() => setList(content.list)}
             px={0}
             maxH={96}
             body={
