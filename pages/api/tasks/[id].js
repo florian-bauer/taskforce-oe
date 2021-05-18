@@ -1,5 +1,8 @@
+import { initializeAuthentication } from "@/lib/auth";
 import { deleteTask, updateTask } from "@/lib/tasks";
 import { verifyIdToken } from "next-firebase-auth";
+
+initializeAuthentication();
 
 export default async (req, res) => {
     let uid;
