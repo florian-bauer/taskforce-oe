@@ -8,13 +8,14 @@ import {
 import PropTypes from "prop-types";
 import { Children } from "react";
 
-const Menu = ({ list }) => (
+const Menu = ({ list, menuButtonProps }) => (
     <ChakraMenu w="100%">
         <MenuButton
             as={IconButton}
             aria-label="Options"
             icon={<ChevronDownIcon />}
             borderRadius={10}
+            {...menuButtonProps}
         />
         <MenuList>
             {Children.toArray(list.map((Component) => Component))}
