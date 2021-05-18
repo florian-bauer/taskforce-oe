@@ -5,8 +5,10 @@ import { filter, getUsers } from "@/controller/user-list-controller/lib";
 import { ViewIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
+import { useAuthUser } from "next-firebase-auth";
 
 const UserListController = () => {
+    const { id } = useAuthUser();
     const [list, setList] = useState([]);
 
     const { data, mutate } = useSWR("/api/user", (url) =>
@@ -14,17 +16,19 @@ const UserListController = () => {
     );
 
     useEffect(async () => {
-        if (!data || !data.map) return;
+        if (!data || !data.map || !data.filter) return;
 
-        setList(
-            data.map((user) => ({
+        const users = data
+            .filter((user) => user._id !== id)
+            .map((user) => ({
                 uid: user._id,
                 name: user.name,
                 email: user.email,
                 role: user?.administrator ? "admin" : "user",
                 mutate,
-            }))
-        );
+            }));
+
+        setList(users);
     }, [data]);
 
     return (
