@@ -43,7 +43,7 @@ const GridController = ({ filterStatus }) => {
     // Handling the Grid Responsiveness with different Props on different Breakpoints
     const SimpleGridProps = useBreakpointValue({
         base: { columns: 1 },
-        sm: { minChildWidth: "400px" },
+        sm: { minChildWidth: "500px" },
     });
 
     return (
