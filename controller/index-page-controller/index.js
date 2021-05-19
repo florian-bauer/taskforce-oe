@@ -1,6 +1,6 @@
 import { HeaderController } from "@/controller/index-page-controller/header-controller";
-import { getUser } from "@/controller/index-page-controller/lib";
 import { authorizeOrganization } from "@/lib/auth/organization";
+import { getUser } from "@/shared/user";
 import { Flex } from "@chakra-ui/react";
 import firebase from "firebase";
 import { useAuthUser } from "next-firebase-auth";

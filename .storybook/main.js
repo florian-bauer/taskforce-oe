@@ -18,6 +18,7 @@ module.exports = {
             "@/constants": path.resolve(__dirname, "../constants"),
             "@/lib": path.resolve(__dirname, "../lib"),
             "@/controller": path.resolve(__dirname, "../controller"),
+            "@/shared": path.resolve(__dirname, "../shared"),
         };
         return {
             ...config,

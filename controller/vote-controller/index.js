@@ -1,5 +1,6 @@
 import { Button } from "@/components/button";
-import { addVote, isVoter, removeVote } from "@/controller/vote-controller/lib";
+import { isVoter } from "@/controller/vote-controller/lib";
+import { addVote, removeVote } from "@/shared/vote";
 import { useAuthUser } from "next-firebase-auth";
 import { useState } from "react";
 

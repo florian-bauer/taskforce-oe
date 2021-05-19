@@ -1,4 +1,5 @@
 import { ActionModal } from "@/components/action-modal";
+import { setRole } from "@/controller/user-roles-controller/lib";
 import { ArrowDownIcon } from "@chakra-ui/icons";
 import { MenuItem, useToast } from "@chakra-ui/react";
 import { useAuthUser } from "next-firebase-auth";
@@ -21,18 +22,11 @@ const DowngradeController = ({ uid, name, email, mutate }) => {
             onAction={async (onClose) => {
                 const token = await getIdToken();
 
-                const response = await fetch("/api/user/role", {
-                    method: "PUT",
-                    headers: {
-                        authorization: token,
-                    },
-                    body: JSON.stringify({
-                        uid,
-                        administrator: false,
-                    }),
+                const { data } = await setRole({
+                    token,
+                    uid,
+                    administrator: false,
                 });
-
-                const data = await response.json();
 
                 if (data?.success) {
                     onClose();

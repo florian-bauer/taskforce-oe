@@ -1,8 +1,8 @@
 import { ActionModal } from "@/components/action-modal";
+import { setRole } from "@/controller/user-roles-controller/lib";
 import { ArrowUpIcon } from "@chakra-ui/icons";
-import { MenuItem } from "@chakra-ui/react";
+import { MenuItem, useToast } from "@chakra-ui/react";
 import { useAuthUser } from "next-firebase-auth";
-import { useToast } from "@chakra-ui/react";
 
 const UpgradeController = ({ uid, name, email, mutate }) => {
     const toast = useToast();
@@ -22,18 +22,11 @@ const UpgradeController = ({ uid, name, email, mutate }) => {
             onAction={async (onClose) => {
                 const token = await getIdToken();
 
-                const response = await fetch("/api/user/role", {
-                    method: "PUT",
-                    headers: {
-                        authorization: token,
-                    },
-                    body: JSON.stringify({
-                        uid,
-                        administrator: true,
-                    }),
+                const { data } = await setRole({
+                    token,
+                    uid,
+                    administrator: true,
                 });
-
-                const data = await response.json();
 
                 if (data?.success) {
                     onClose();
