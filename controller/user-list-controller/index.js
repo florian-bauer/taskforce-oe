@@ -1,11 +1,11 @@
 import { Button } from "@/components/button";
 import { TableSearchModal } from "@/components/table-search-modal";
 import { Body as body } from "@/controller/user-list-controller/body";
-import { filter, getUsers } from "@/controller/user-list-controller/lib";
+import { filter } from "@/controller/user-list-controller/lib";
 import { ViewIcon } from "@chakra-ui/icons";
+import { useAuthUser } from "next-firebase-auth";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-import { useAuthUser } from "next-firebase-auth";
 
 const UserListController = () => {
     const { id } = useAuthUser();
@@ -41,7 +41,7 @@ const UserListController = () => {
                     onClick={onOpen}
                 />
             )}
-            header="Alle Benutzer"
+            header="Alle Benutzer:innen"
             labelClose="Schließen"
             content={{ list, body }}
             filter={filter}

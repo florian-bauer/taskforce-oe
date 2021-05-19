@@ -1,9 +1,6 @@
 import { Button } from "@/components/button";
-import {
-    addParticipant,
-    isParticipant,
-    removeParticipant,
-} from "@/controller/participant-controller/lib";
+import { isParticipant } from "@/controller/participant-controller/lib";
+import { addParticipant, removeParticipant } from "@/shared/participant";
 import { useAuthUser } from "next-firebase-auth";
 import { useState } from "react";
 

@@ -13,10 +13,4 @@ const filter = (searchTerm, list) => {
     });
 };
 
-const getUsers = async () => {
-    const response = await fetch("/api/user");
-    const users = await response.json();
-    return { users };
-};
-
-export { getBadgeColor, filter, getUsers };
+export { getBadgeColor, filter };

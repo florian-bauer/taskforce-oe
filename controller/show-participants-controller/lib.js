@@ -1,7 +1,4 @@
-const getUser = async ({ uid }) => {
-    const response = await fetch(`/api/user/${uid}`);
-    return await response.json();
-};
+import { getUser } from "@/shared/user";
 
 const getParticipants = async ({ participants }) => {
     const _participants = [];

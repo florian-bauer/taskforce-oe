@@ -10,5 +10,6 @@ module.exports = {
         "@/constants/(.*)": "<rootDir>/constants/$1",
         "@/lib/(.*)": "<rootDir>/lib/$1",
         "@/controller/(.*)": "<rootDir>/controller/$1",
+        "@/shared/(.*)": "<rootDir>/shared/$1",
     },
 };
