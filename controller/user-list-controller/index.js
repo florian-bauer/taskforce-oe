@@ -41,7 +41,7 @@ const UserListController = () => {
                     onClick={onOpen}
                 />
             )}
-            header="Alle Benutzer"
+            header="Alle Benutzer:innen"
             labelClose="Schließen"
             content={{ list, body }}
             filter={filter}
