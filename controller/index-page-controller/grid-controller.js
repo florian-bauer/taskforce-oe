@@ -1,5 +1,5 @@
 import { CardButton } from "@/components/card-button";
-import { ALL } from "@/constants/status";
+import { ALL, VOTING } from "@/constants/status";
 import { CardController } from "@/controller/card-controller";
 import { CreateTaskController } from "@/controller/create-task-controller";
 import { fetcher } from "@/lib/fetcher";
@@ -25,19 +25,31 @@ const GridController = ({ filterStatus }) => {
     useEffect(() => {
         if (!data || !filterStatus) return;
 
-        // Sorting Tasks after Votes (Tasks with most Votes first)
-        const sortedTasks = data?.tasks?.sort(
+        const voteSortedTasks = data?.tasks?.sort(
             (a, b) => b.votes.length - a.votes.length
         );
 
         if (filterStatus === ALL) {
-            return setTasks(sortedTasks);
+            setTasks(voteSortedTasks);
+            return;
         }
 
-        const filteredTasks = sortedTasks?.filter(
+        const sortedByStatusTasks = voteSortedTasks?.filter(
             (task) => task?.status === filterStatus
         );
-        setTasks(filteredTasks);
+
+        if (filterStatus === VOTING) {
+            setTasks(sortedByStatusTasks);
+            return;
+        }
+
+        const sortedByDateTasks = sortedByStatusTasks?.sort((a, b) => {
+            const dateA = new Date(a.statusSince);
+            const dateB = new Date(b.statusSince);
+
+            return dateA.getTime() - dateB.getTime();
+        });
+        setTasks(sortedByDateTasks);
     }, [data, filterStatus]);
 
     // Handling the Grid Responsiveness with different Props on different Breakpoints
