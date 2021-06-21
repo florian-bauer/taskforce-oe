@@ -68,16 +68,18 @@ const GridController = ({ filterStatus }) => {
                     ))
                 )}
 
-                <CreateTaskController
-                    open={(onOpen) => (
-                        <CardButton
-                            label="Vorschlag erstellen"
-                            icon={<AddIcon />}
-                            onClick={onOpen}
-                        />
-                    )}
-                    onCreate={async () => await mutate("/api/tasks")}
-                />
+                {filterStatus === VOTING && (
+                    <CreateTaskController
+                        open={(onOpen) => (
+                            <CardButton
+                                label="Vorschlag erstellen"
+                                icon={<AddIcon />}
+                                onClick={onOpen}
+                            />
+                        )}
+                        onCreate={async () => await mutate("/api/tasks")}
+                    />
+                )}
             </SimpleGrid>
         </Flex>
     );
