@@ -14,7 +14,7 @@ const Footer = ({ children }) => {
         );
     } else {
         return (
-            <HStack w="100%" mt={8}>
+            <HStack w="100%" pt={8} mt="auto" mb={0}>
                 {children}
             </HStack>
         );
