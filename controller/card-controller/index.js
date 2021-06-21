@@ -48,6 +48,7 @@ const CardController = ({ data, mutate }) => {
             description={description}
             boxShadow={isOwner && "lg"}
             borderColor={isOwner && `${badge.colorScheme}.200`}
+            maxWidth="768px"
         >
             {isAdmin ? (
                 <AdminActionsController data={data} mutate={mutate} />
