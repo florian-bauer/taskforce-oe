@@ -1,5 +1,4 @@
 import { CardButton } from "@/components/card-button";
-import { EmptyState } from "@/components/empty-state";
 import { ALL, VOTING } from "@/constants/status";
 import { CardController } from "@/controller/card-controller";
 import { CreateTaskController } from "@/controller/create-task-controller";
@@ -59,23 +58,14 @@ const GridController = ({ filterStatus }) => {
         sm: { minChildWidth: "500px" },
     });
 
-    const showEmptyState = tasks.length <= 0;
-
     return (
         <Flex flexDir="column" px={6} pb={6}>
             <Divider />
             <SimpleGrid {...SimpleGridProps} spacing={6} mt={6}>
-                {showEmptyState ? (
-                    <EmptyState
-                        title="Aktuell ist kein Task hier aufgelistet"
-                        subtitle="Versuche es doch mit einem anderen Tab"
-                    />
-                ) : (
-                    Children.toArray(
-                        tasks?.map((task) => (
-                            <CardController data={task} mutate={mutate} />
-                        ))
-                    )
+                {Children.toArray(
+                    tasks?.map((task) => (
+                        <CardController data={task} mutate={mutate} />
+                    ))
                 )}
 
                 {filterStatus === VOTING && (

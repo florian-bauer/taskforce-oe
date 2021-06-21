@@ -6,7 +6,9 @@ const Body = ({ title, description }) => (
         <Heading fontWeight="semibold" fontSize="18px">
             {title}
         </Heading>
-        <Text fontSize="sm">{description}</Text>
+        <Text fontSize="sm" whiteSpace="pre-line">
+            {description}
+        </Text>
     </VStack>
 );
 

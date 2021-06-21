@@ -35,6 +35,7 @@ const TaskFormController = ({
                     label: "Beschreibung",
                     onChange: (event) => setDescription(event.target.value),
                     defaultValue: defaultDescription || "",
+                    textarea: true,
                 },
             ]}
             disabled={
