@@ -3,6 +3,7 @@ import {
     FormControl,
     FormLabel,
     Input,
+    Textarea,
     Modal,
     ModalBody,
     ModalCloseButton,
@@ -43,14 +44,30 @@ const FormModal = ({
                     <ModalBody pb={6}>
                         {Children.toArray(
                             inputs.map(
-                                ({ label, onChange, defaultValue }, index) => (
+                                (
+                                    {
+                                        label,
+                                        onChange,
+                                        defaultValue,
+                                        textarea = false,
+                                    },
+                                    index
+                                ) => (
                                     <FormControl mt={index !== 0 && 4}>
                                         <FormLabel>{label}</FormLabel>
-                                        <Input
-                                            placeholder={label}
-                                            onChange={onChange}
-                                            defaultValue={defaultValue}
-                                        />
+                                        {textarea ? (
+                                            <Textarea
+                                                placeholder={label}
+                                                onChange={onChange}
+                                                defaultValue={defaultValue}
+                                            />
+                                        ) : (
+                                            <Input
+                                                placeholder={label}
+                                                onChange={onChange}
+                                                defaultValue={defaultValue}
+                                            />
+                                        )}
                                     </FormControl>
                                 )
                             )
