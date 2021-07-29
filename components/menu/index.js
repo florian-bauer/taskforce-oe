@@ -11,10 +11,10 @@ import { Children } from "react";
 const Menu = ({ list, menuButtonProps }) => (
     <ChakraMenu w="100%">
         <MenuButton
+            size="sm"
             as={IconButton}
             aria-label="Options"
             icon={<ChevronDownIcon />}
-            borderRadius={10}
             {...menuButtonProps}
         />
         <MenuList>

@@ -1,4 +1,4 @@
-import { Tooltip } from "@/components/card/components/tooltip";
+import { Tooltip } from "@/components/list-item/components/tooltip";
 import { Avatar, Flex, Text, useBreakpointValue } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 
