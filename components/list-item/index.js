@@ -23,8 +23,16 @@ const ListItem = ({
                 title={title}
                 participants={participants}
                 actions={children}
+                onClick={(event) => {
+                    if (
+                        event.target instanceof HTMLDivElement ||
+                        event.target instanceof HTMLHeadingElement
+                    ) {
+                        setOpen(!isOpen);
+                    }
+                }}
             />
-            <Content description={description} creator={creator} />
+            {isOpen && <Content description={description} creator={creator} />}
         </Wrapper>
     );
 };
