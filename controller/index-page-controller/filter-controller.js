@@ -23,6 +23,7 @@ const FilterController = ({ onChange }) => {
             ]}
             defaultValue="Voting"
             p={6}
+            minHeight="84px"
             onChange={(status) => {
                 const convertedStatus = useOptions(status, [
                     // { is: labels.all, be: ALL },
