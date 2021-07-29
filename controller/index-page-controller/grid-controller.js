@@ -1,4 +1,5 @@
 import { CardButton } from "@/components/card-button";
+import { EmptyState } from "@/components/empty-state";
 import { ALL, VOTING } from "@/constants/status";
 import { CreateTaskController } from "@/controller/create-task-controller";
 import { ListItemController } from "@/controller/list-item-controller";
@@ -48,9 +49,16 @@ const GridController = ({ filterStatus }) => {
     }, [data, filterStatus]);
 
     return (
-        <Flex flexDir="column" px={6} pb={6}>
+        <Flex flexDir="column" px={6} pb={6} height="100%">
             <Divider />
-            <Flex flexDirection="column">
+            <Flex flexDirection="column" height="100%">
+                {tasks?.length <= 0 && (
+                    <EmptyState
+                        title="Keine Vorschläge hier 🔍"
+                        subtitle="Aktualisiere die Seite oder erstelle einen Vorschlag"
+                    />
+                )}
+
                 {Children.toArray(
                     tasks?.map((task) => (
                         <ListItemController data={task} mutate={mutate} />

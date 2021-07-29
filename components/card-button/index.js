@@ -4,13 +4,14 @@ import PropTypes from "prop-types";
 const CardButton = ({ label, icon, ...props }) => (
     <ChakraButton
         bg="gray.50"
-        border="1px solid"
-        borderColor="rgba(0, 0, 0, .25)"
+        // border="1px solid"
+        // borderColor="rgba(0, 0, 0, .25)"
+        // borderStyle="dashed"
         borderRadius={10}
-        borderStyle="dashed"
+        p={12}
         w="100%"
-        h="100%"
-        p={6}
+        mx="auto"
+        maxWidth="1400px"
         alignItems="center"
         justifyContent="center"
         {...props}

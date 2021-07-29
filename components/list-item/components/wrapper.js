@@ -10,7 +10,8 @@ const Wrapper = ({ children }) => (
         position="relative"
         flexDirection="column"
         mt={6}
-        maxWidth="1100px"
+        mx="auto"
+        maxWidth="1400px"
     >
         {children}
     </Flex>
