@@ -13,9 +13,9 @@ import {
     DeleteIcon,
     EditIcon,
     RepeatIcon,
-    ViewIcon,
     WarningIcon,
 } from "@chakra-ui/icons";
+import { GroupIcon } from "@/styles/icons/GroupIcon";
 import { MenuItem } from "@chakra-ui/menu";
 import { IconButton } from "@chakra-ui/react";
 
@@ -50,7 +50,7 @@ const AdminActionsController = ({ data, mutate }) => {
                     list={[
                         <ShowParticipantsController
                             open={(onOpen) => (
-                                <MenuItem onClick={onOpen} icon={<ViewIcon />}>
+                                <MenuItem onClick={onOpen} icon={<GroupIcon />}>
                                     Helfer:innen anzeigen
                                 </MenuItem>
                             )}
@@ -102,7 +102,7 @@ const AdminActionsController = ({ data, mutate }) => {
                                 onClick={onOpen}
                                 colorScheme="gray"
                                 aria-label="Helfer:innen anzeigen"
-                                icon={<ViewIcon />}
+                                icon={<GroupIcon />}
                                 size="sm"
                             />
                         </Tooltip>

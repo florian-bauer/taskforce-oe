@@ -8,9 +8,10 @@ import { ParticipantController } from "@/controller/participant-controller";
 import { RestoreTaskController } from "@/controller/restore-task-controller";
 import { ShowParticipantsController } from "@/controller/show-participants-controller";
 import { VoteController } from "@/controller/vote-controller";
-import { DeleteIcon, EditIcon, RepeatIcon, ViewIcon } from "@chakra-ui/icons";
+import { DeleteIcon, EditIcon, RepeatIcon } from "@chakra-ui/icons";
 import { MenuItem } from "@chakra-ui/menu";
 import { IconButton } from "@chakra-ui/react";
+import { GroupIcon } from "@/styles/icons/GroupIcon";
 
 const OwnerActionsController = ({ data, mutate }) => {
     if (data.status === VOTING) {
@@ -43,7 +44,7 @@ const OwnerActionsController = ({ data, mutate }) => {
                     list={[
                         <ShowParticipantsController
                             open={(onOpen) => (
-                                <MenuItem onClick={onOpen} icon={<ViewIcon />}>
+                                <MenuItem onClick={onOpen} icon={<GroupIcon />}>
                                     Helfer:innen anzeigen
                                 </MenuItem>
                             )}
@@ -80,7 +81,7 @@ const OwnerActionsController = ({ data, mutate }) => {
                                 onClick={onOpen}
                                 colorScheme="gray"
                                 aria-label="Helfer:innen anzeigen"
-                                icon={<ViewIcon />}
+                                icon={<GroupIcon />}
                                 size="sm"
                             />
                         </Tooltip>
