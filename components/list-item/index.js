@@ -13,6 +13,7 @@ const ListItem = ({
     participants,
     creator,
     children,
+    headChildren,
 }) => {
     const [isOpen, setOpen] = useState(false);
 
@@ -31,7 +32,9 @@ const ListItem = ({
                         setOpen(!isOpen);
                     }
                 }}
-            />
+            >
+                {headChildren}
+            </Head>
             {isOpen && <Content description={description} creator={creator} />}
         </Wrapper>
     );

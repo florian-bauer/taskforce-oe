@@ -1,5 +1,7 @@
 import { ListItem } from "@/components/list-item";
+import { Tooltip } from "@/components/list-item/components/tooltip";
 import { DELETED } from "@/constants/status";
+import { EditTaskController } from "@/controller/edit-task-controller";
 import {
     AdminActionsController,
     OwnerActionsController,
@@ -10,6 +12,8 @@ import {
     getParticipants,
     getUser,
 } from "@/controller/list-item-controller/lib";
+import { EditIcon } from "@chakra-ui/icons";
+import { IconButton } from "@chakra-ui/react";
 import { useAuthUser } from "next-firebase-auth";
 import { useEffect, useState } from "react";
 
@@ -48,6 +52,29 @@ const ListItemController = ({ data, mutate }) => {
             badge={badge}
             description={description}
             creator={creator}
+            headChildren={
+                <>
+                    {!isUser && (
+                        <EditTaskController
+                            open={(onOpen) => (
+                                <Tooltip label="Vorschlag bearbeiten">
+                                    <IconButton
+                                        onClick={onOpen}
+                                        colorScheme="gray"
+                                        aria-label="Vorschlag bearbeiten"
+                                        icon={<EditIcon />}
+                                        size="sm"
+                                    />
+                                </Tooltip>
+                            )}
+                            mutate={mutate}
+                            taskId={data._id}
+                            title={data.title}
+                            description={data.description}
+                        />
+                    )}
+                </>
+            }
         >
             {isAdmin ? (
                 <AdminActionsController data={data} mutate={mutate} />

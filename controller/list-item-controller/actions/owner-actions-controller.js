@@ -23,7 +23,7 @@ const OwnerActionsController = ({ data, mutate }) => {
                     participants={data.participants}
                     mutate={mutate}
                 />
-                <EditTaskController
+                {/* <EditTaskController
                     open={(onOpen) => (
                         <Tooltip label="Vorschlag bearbeiten">
                             <IconButton
@@ -39,7 +39,7 @@ const OwnerActionsController = ({ data, mutate }) => {
                     taskId={data._id}
                     title={data.title}
                     description={data.description}
-                />
+                /> */}
                 <Menu
                     list={[
                         <ShowParticipantsController

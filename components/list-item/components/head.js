@@ -1,7 +1,7 @@
 import { Participants } from "@/components/list-item/components/participants";
 import { Flex, Heading, HStack } from "@chakra-ui/react";
 
-const Head = ({ title, participants, actions, onClick }) => (
+const Head = ({ title, participants, actions, onClick, children }) => (
     <Flex
         alignItems="center"
         justifyContent="space-between"
@@ -9,6 +9,7 @@ const Head = ({ title, participants, actions, onClick }) => (
         cursor="pointer"
     >
         <HStack spacing={4}>
+            {children}
             <Heading size="md" userSelect="none" pointerEvents="all">
                 {title}
             </Heading>
