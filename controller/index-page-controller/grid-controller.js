@@ -70,6 +70,7 @@ const GridController = ({ filterStatus }) => {
                         open={(onOpen) => (
                             <CardButton
                                 mt={6}
+                                pb={12}
                                 label="Vorschlag erstellen"
                                 icon={<AddIcon />}
                                 onClick={onOpen}

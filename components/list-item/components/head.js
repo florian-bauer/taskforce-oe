@@ -8,13 +8,13 @@ const Head = ({ title, participants, actions, onClick }) => (
         onClick={onClick}
         cursor="pointer"
     >
-        <Heading size="md" userSelect="none" pointerEvents="all">
-            {title}
-        </Heading>
-        <HStack spacing={12}>
-            <HStack>{actions}</HStack>
+        <HStack spacing={4}>
+            <Heading size="md" userSelect="none" pointerEvents="all">
+                {title}
+            </Heading>
             <Participants participants={participants} />
         </HStack>
+        <HStack>{actions}</HStack>
     </Flex>
 );
 
