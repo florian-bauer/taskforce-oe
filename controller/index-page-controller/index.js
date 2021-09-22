@@ -51,7 +51,12 @@ const IndexPageController = () => {
     return (
         <>
             {authorized && (
-                <Flex flexDirection="column">
+                <Flex
+                    flexDirection="column"
+                    height="100%"
+                    maxWidth="1400px"
+                    mx="auto"
+                >
                     <HeaderController administrator={administrator} />
                     <FilterController
                         onChange={({ status }) => setFilterStatus(status)}

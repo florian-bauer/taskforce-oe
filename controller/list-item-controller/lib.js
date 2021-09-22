@@ -21,7 +21,7 @@ const getBadge = ({ status }) => {
             is: FINISHED,
             be: {
                 colorScheme: "green",
-                label: "Abgeschlossen",
+                label: "Abgearbeitet",
             },
         },
         {

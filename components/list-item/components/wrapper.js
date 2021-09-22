@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 
-const Wrapper = ({ children, ...props }) => (
+const Wrapper = ({ children }) => (
     <Flex
         bg="gray.50"
         border="1px solid rgba(0, 0, 0, .05)"
@@ -9,7 +9,9 @@ const Wrapper = ({ children, ...props }) => (
         p={6}
         position="relative"
         flexDirection="column"
-        {...props}
+        mt={6}
+        mx="auto"
+        maxWidth="1400px"
     >
         {children}
     </Flex>

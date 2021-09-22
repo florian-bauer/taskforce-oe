@@ -9,7 +9,7 @@ const HeaderController = ({ administrator }) => (
         <Image
             src="/Logo.png"
             alt="BCM Solutions Logo"
-            height={[8, 12, 14]}
+            height={[4, 8, 12]}
             fallback={<Skeleton width="163px" height="64px" />}
         />
         <HStack>

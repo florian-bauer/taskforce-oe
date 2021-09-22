@@ -2,10 +2,10 @@ import { Button } from "@/components/button";
 import { TableSearchModal } from "@/components/table-search-modal";
 import { Body as body } from "@/controller/user-list-controller/body";
 import { filter } from "@/controller/user-list-controller/lib";
-import { ViewIcon } from "@chakra-ui/icons";
 import { useAuthUser } from "next-firebase-auth";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
+import { GroupIcon } from "@/styles/icons/GroupIcon";
 
 const UserListController = () => {
     const { id } = useAuthUser();
@@ -36,7 +36,7 @@ const UserListController = () => {
             open={(onOpen) => (
                 <Button
                     label="User List"
-                    rightIcon={<ViewIcon />}
+                    rightIcon={<GroupIcon />}
                     size="sm"
                     onClick={onOpen}
                 />

@@ -1,4 +1,4 @@
-import { Button } from "@/components/button";
+import { Tooltip } from "@/components/list-item/components/tooltip";
 import { Menu } from "@/components/menu";
 import { DELETED, PROGRESS, VOTING } from "@/constants/status";
 import { DeleteTaskController } from "@/controller/delete-task-controller";
@@ -8,9 +8,10 @@ import { ParticipantController } from "@/controller/participant-controller";
 import { RestoreTaskController } from "@/controller/restore-task-controller";
 import { ShowParticipantsController } from "@/controller/show-participants-controller";
 import { VoteController } from "@/controller/vote-controller";
-import { DeleteIcon, EditIcon, ViewIcon } from "@chakra-ui/icons";
+import { DeleteIcon, EditIcon, RepeatIcon } from "@chakra-ui/icons";
 import { MenuItem } from "@chakra-ui/menu";
 import { IconButton } from "@chakra-ui/react";
+import { GroupIcon } from "@/styles/icons/GroupIcon";
 
 const OwnerActionsController = ({ data, mutate }) => {
     if (data.status === VOTING) {
@@ -22,25 +23,28 @@ const OwnerActionsController = ({ data, mutate }) => {
                     participants={data.participants}
                     mutate={mutate}
                 />
-                <EditTaskController
+                {/* <EditTaskController
                     open={(onOpen) => (
-                        <IconButton
-                            onClick={onOpen}
-                            colorScheme="gray"
-                            aria-label="Vorschlag bearbeiten"
-                            icon={<EditIcon />}
-                        />
+                        <Tooltip label="Vorschlag bearbeiten">
+                            <IconButton
+                                onClick={onOpen}
+                                colorScheme="gray"
+                                aria-label="Vorschlag bearbeiten"
+                                icon={<EditIcon />}
+                                size="sm"
+                            />
+                        </Tooltip>
                     )}
                     mutate={mutate}
                     taskId={data._id}
                     title={data.title}
                     description={data.description}
-                />
+                /> */}
                 <Menu
                     list={[
                         <ShowParticipantsController
                             open={(onOpen) => (
-                                <MenuItem onClick={onOpen} icon={<ViewIcon />}>
+                                <MenuItem onClick={onOpen} icon={<GroupIcon />}>
                                     Helfer:innen anzeigen
                                 </MenuItem>
                             )}
@@ -72,12 +76,15 @@ const OwnerActionsController = ({ data, mutate }) => {
             <>
                 <ShowParticipantsController
                     open={(onOpen) => (
-                        <Button
-                            label="Helfer:innen anzeigen"
-                            onClick={onOpen}
-                            primary
-                            w="100%"
-                        />
+                        <Tooltip label="Helfer:innen anzeigen">
+                            <IconButton
+                                onClick={onOpen}
+                                colorScheme="gray"
+                                aria-label="Helfer:innen anzeigen"
+                                icon={<GroupIcon />}
+                                size="sm"
+                            />
+                        </Tooltip>
                     )}
                     participants={data.participants}
                 />
@@ -90,12 +97,15 @@ const OwnerActionsController = ({ data, mutate }) => {
             <>
                 <RestoreTaskController
                     open={(onOpen) => (
-                        <Button
-                            onClick={onOpen}
-                            label="Wiederherstellen"
-                            primary
-                            w="100%"
-                        />
+                        <Tooltip label="Wiederherstellen">
+                            <IconButton
+                                onClick={onOpen}
+                                colorScheme="gray"
+                                aria-label="Vorschlag wiederherstellen"
+                                icon={<RepeatIcon />}
+                                size="sm"
+                            />
+                        </Tooltip>
                     )}
                     taskId={data._id}
                     mutate={mutate}
@@ -104,15 +114,15 @@ const OwnerActionsController = ({ data, mutate }) => {
                 />
                 <FinalDeleteTaskController
                     open={(onOpen) => (
-                        <Button
-                            onClick={onOpen}
-                            label="Endgültig löschen"
-                            primary
-                            w="100%"
-                            background="red.500"
-                            _hover={{ bg: "red.400" }}
-                            _active={{ bg: "red.300" }}
-                        />
+                        <Tooltip label="Endgültig löschen">
+                            <IconButton
+                                onClick={onOpen}
+                                colorScheme="red"
+                                aria-label="Vorschlag endgültig löschen"
+                                icon={<DeleteIcon />}
+                                size="sm"
+                            />
+                        </Tooltip>
                     )}
                     taskId={data._id}
                     mutate={mutate}

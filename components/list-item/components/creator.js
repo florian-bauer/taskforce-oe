@@ -1,4 +1,4 @@
-import { Tooltip } from "@/components/card/components/tooltip";
+import { Tooltip } from "@/components/list-item/components/tooltip";
 import { Avatar, Flex, Text, useBreakpointValue } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 
@@ -9,7 +9,7 @@ const Creator = ({ name, avatar }) => {
     return (
         <Tooltip label="Ersteller:in">
             <Flex alignItems="center">
-                <Avatar size="md" name={name} src={avatar} userSelect="none" />
+                <Avatar size="sm" name={name} src={avatar} userSelect="none" />
 
                 {isNameVisible && (
                     <Text

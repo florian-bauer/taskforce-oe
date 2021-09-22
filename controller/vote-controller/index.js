@@ -1,8 +1,10 @@
-import { Button } from "@/components/button";
 import { isVoter } from "@/controller/vote-controller/lib";
 import { addVote, removeVote } from "@/shared/vote";
 import { useAuthUser } from "next-firebase-auth";
 import { useState } from "react";
+import { Button } from "@chakra-ui/react";
+import { ChevronUpIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import { Tooltip } from "@/components/list-item/components/tooltip";
 
 const VoteController = ({ taskId, votes }) => {
     const { id: uid, getIdToken } = useAuthUser();
@@ -11,40 +13,44 @@ const VoteController = ({ taskId, votes }) => {
 
     if (voter) {
         return (
-            <Button
-                label={`Vote entfernen (${amount})`}
-                background="red.500"
-                _hover={{ bg: "red.400" }}
-                _active={{ bg: "red.300" }}
-                primary
-                w="100%"
-                onClick={async () => {
-                    const token = await getIdToken();
-                    const { data } = await removeVote({ token, taskId });
+            <Tooltip label="Vote entfernen">
+                <Button
+                    size="sm"
+                    colorScheme="red"
+                    leftIcon={<ChevronDownIcon />}
+                    onClick={async () => {
+                        const token = await getIdToken();
+                        const { data } = await removeVote({ token, taskId });
 
-                    if (data?.success) {
-                        setVoter(false);
-                        setAmount(amount - 1);
-                    }
-                }}
-            />
+                        if (data?.success) {
+                            setVoter(false);
+                            setAmount(amount - 1);
+                        }
+                    }}
+                >
+                    {amount}
+                </Button>
+            </Tooltip>
         );
     } else {
         return (
-            <Button
-                label={`Vote hinzufügen (${amount})`}
-                primary
-                w="100%"
-                onClick={async () => {
-                    const token = await getIdToken();
-                    const { data } = await addVote({ token, taskId });
+            <Tooltip label="Vote hinzufügen">
+                <Button
+                    size="sm"
+                    leftIcon={<ChevronUpIcon />}
+                    onClick={async () => {
+                        const token = await getIdToken();
+                        const { data } = await addVote({ token, taskId });
 
-                    if (data?.success) {
-                        setVoter(true);
-                        setAmount(amount + 1);
-                    }
-                }}
-            />
+                        if (data?.success) {
+                            setVoter(true);
+                            setAmount(amount + 1);
+                        }
+                    }}
+                >
+                    {amount}
+                </Button>
+            </Tooltip>
         );
     }
 };

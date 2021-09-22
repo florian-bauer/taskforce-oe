@@ -1,15 +1,11 @@
 import { CardButton } from "@/components/card-button";
+import { EmptyState } from "@/components/empty-state";
 import { ALL, VOTING } from "@/constants/status";
-import { CardController } from "@/controller/card-controller";
 import { CreateTaskController } from "@/controller/create-task-controller";
+import { ListItemController } from "@/controller/list-item-controller";
 import { fetcher } from "@/lib/fetcher";
 import { AddIcon } from "@chakra-ui/icons";
-import {
-    Divider,
-    Flex,
-    SimpleGrid,
-    useBreakpointValue,
-} from "@chakra-ui/react";
+import { Divider, Flex } from "@chakra-ui/react";
 import { useAuthUser } from "next-firebase-auth";
 import { Children, useEffect, useState } from "react";
 import useSWR from "swr";
@@ -52,19 +48,20 @@ const GridController = ({ filterStatus }) => {
         setTasks(sortedByDateTasks);
     }, [data, filterStatus]);
 
-    // Handling the Grid Responsiveness with different Props on different Breakpoints
-    const SimpleGridProps = useBreakpointValue({
-        base: { columns: 1 },
-        sm: { minChildWidth: "500px" },
-    });
-
     return (
-        <Flex flexDir="column" px={6} pb={6}>
+        <Flex flexDir="column" px={6} pb={6} height="100%">
             <Divider />
-            <SimpleGrid {...SimpleGridProps} spacing={6} mt={6}>
+            <Flex flexDirection="column" height="100%">
+                {tasks?.length <= 0 && (
+                    <EmptyState
+                        title="Keine Vorschläge hier 🔍"
+                        subtitle="Aktualisiere die Seite oder erstelle einen Vorschlag"
+                    />
+                )}
+
                 {Children.toArray(
                     tasks?.map((task) => (
-                        <CardController data={task} mutate={mutate} />
+                        <ListItemController data={task} mutate={mutate} />
                     ))
                 )}
 
@@ -72,6 +69,8 @@ const GridController = ({ filterStatus }) => {
                     <CreateTaskController
                         open={(onOpen) => (
                             <CardButton
+                                mt={6}
+                                pb={12}
                                 label="Vorschlag erstellen"
                                 icon={<AddIcon />}
                                 onClick={onOpen}
@@ -80,7 +79,7 @@ const GridController = ({ filterStatus }) => {
                         onCreate={async () => await mutate("/api/tasks")}
                     />
                 )}
-            </SimpleGrid>
+            </Flex>
         </Flex>
     );
 };

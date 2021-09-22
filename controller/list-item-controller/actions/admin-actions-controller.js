@@ -1,6 +1,7 @@
-import { Button } from "@/components/button";
+import { Tooltip } from "@/components/list-item/components/tooltip";
 import { Menu } from "@/components/menu";
 import { DELETED, FINISHED, PROGRESS, VOTING } from "@/constants/status";
+import { ChangeTaskStatusController } from "@/controller/change-task-status-controller";
 import { DeleteTaskController } from "@/controller/delete-task-controller";
 import { EditTaskController } from "@/controller/edit-task-controller";
 import { FinalDeleteTaskController } from "@/controller/final-delete-task-controller";
@@ -8,9 +9,14 @@ import { ParticipantController } from "@/controller/participant-controller";
 import { RestoreTaskController } from "@/controller/restore-task-controller";
 import { ShowParticipantsController } from "@/controller/show-participants-controller";
 import { VoteController } from "@/controller/vote-controller";
-import { DeleteIcon, EditIcon, ViewIcon, WarningIcon } from "@chakra-ui/icons";
+import {
+    DeleteIcon,
+    EditIcon,
+    RepeatIcon,
+    WarningIcon,
+} from "@chakra-ui/icons";
+import { GroupIcon } from "@/styles/icons/GroupIcon";
 import { MenuItem } from "@chakra-ui/menu";
-import { ChangeTaskStatusController } from "@/controller/change-task-status-controller";
 import { IconButton } from "@chakra-ui/react";
 
 const AdminActionsController = ({ data, mutate }) => {
@@ -23,25 +29,28 @@ const AdminActionsController = ({ data, mutate }) => {
                     participants={data.participants}
                     mutate={mutate}
                 />
-                <EditTaskController
+                {/* <EditTaskController
                     open={(onOpen) => (
-                        <IconButton
-                            onClick={onOpen}
-                            colorScheme="gray"
-                            aria-label="Vorschlag bearbeiten"
-                            icon={<EditIcon />}
-                        />
+                        <Tooltip label="Vorschlag bearbeiten">
+                            <IconButton
+                                onClick={onOpen}
+                                colorScheme="gray"
+                                aria-label="Vorschlag bearbeiten"
+                                icon={<EditIcon />}
+                                size="sm"
+                            />
+                        </Tooltip>
                     )}
                     mutate={mutate}
                     taskId={data._id}
                     title={data.title}
                     description={data.description}
-                />
+                /> */}
                 <Menu
                     list={[
                         <ShowParticipantsController
                             open={(onOpen) => (
-                                <MenuItem onClick={onOpen} icon={<ViewIcon />}>
+                                <MenuItem onClick={onOpen} icon={<GroupIcon />}>
                                     Helfer:innen anzeigen
                                 </MenuItem>
                             )}
@@ -88,22 +97,29 @@ const AdminActionsController = ({ data, mutate }) => {
             <>
                 <ShowParticipantsController
                     open={(onOpen) => (
-                        <Button
-                            label="Helfer:innen anzeigen"
-                            onClick={onOpen}
-                            w="100%"
-                        />
+                        <Tooltip label="Helfer:innen anzeigen">
+                            <IconButton
+                                onClick={onOpen}
+                                colorScheme="gray"
+                                aria-label="Helfer:innen anzeigen"
+                                icon={<GroupIcon />}
+                                size="sm"
+                            />
+                        </Tooltip>
                     )}
                     participants={data.participants}
                 />
                 <ChangeTaskStatusController
                     open={(onOpen) => (
-                        <Button
-                            label="Status ändern"
-                            onClick={onOpen}
-                            primary
-                            w="100%"
-                        />
+                        <Tooltip label="Status ändern">
+                            <IconButton
+                                onClick={onOpen}
+                                colorScheme="gray"
+                                aria-label="Status ändern"
+                                icon={<WarningIcon />}
+                                size="sm"
+                            />
+                        </Tooltip>
                     )}
                     mutate={mutate}
                     taskId={data._id}
@@ -120,12 +136,15 @@ const AdminActionsController = ({ data, mutate }) => {
             <>
                 <ChangeTaskStatusController
                     open={(onOpen) => (
-                        <Button
-                            label="Status ändern"
-                            onClick={onOpen}
-                            primary
-                            w="100%"
-                        />
+                        <Tooltip label="Status ändern">
+                            <IconButton
+                                onClick={onOpen}
+                                colorScheme="gray"
+                                aria-label="Status ändern"
+                                icon={<WarningIcon />}
+                                size="sm"
+                            />
+                        </Tooltip>
                     )}
                     mutate={mutate}
                     taskId={data._id}
@@ -135,15 +154,15 @@ const AdminActionsController = ({ data, mutate }) => {
                 />
                 <DeleteTaskController
                     open={(onOpen) => (
-                        <Button
-                            onClick={onOpen}
-                            label="Vorschlag löschen"
-                            primary
-                            w="100%"
-                            background="red.500"
-                            _hover={{ bg: "red.400" }}
-                            _active={{ bg: "red.300" }}
-                        />
+                        <Tooltip label="Vorschlag löschen">
+                            <IconButton
+                                onClick={onOpen}
+                                colorScheme="red"
+                                aria-label="Vorschlag löschen"
+                                icon={<DeleteIcon />}
+                                size="sm"
+                            />
+                        </Tooltip>
                     )}
                     taskId={data._id}
                     mutate={mutate}
@@ -159,12 +178,15 @@ const AdminActionsController = ({ data, mutate }) => {
             <>
                 <RestoreTaskController
                     open={(onOpen) => (
-                        <Button
-                            onClick={onOpen}
-                            label="Wiederherstellen"
-                            primary
-                            w="100%"
-                        />
+                        <Tooltip label="Wiederherstellen">
+                            <IconButton
+                                onClick={onOpen}
+                                colorScheme="gray"
+                                aria-label="Vorschlag wiederherstellen"
+                                icon={<RepeatIcon />}
+                                size="sm"
+                            />
+                        </Tooltip>
                     )}
                     taskId={data._id}
                     mutate={mutate}
@@ -173,15 +195,15 @@ const AdminActionsController = ({ data, mutate }) => {
                 />
                 <FinalDeleteTaskController
                     open={(onOpen) => (
-                        <Button
-                            onClick={onOpen}
-                            label="Endgültig löschen"
-                            primary
-                            w="100%"
-                            background="red.500"
-                            _hover={{ bg: "red.400" }}
-                            _active={{ bg: "red.300" }}
-                        />
+                        <Tooltip label="Endgültig löschen">
+                            <IconButton
+                                onClick={onOpen}
+                                colorScheme="red"
+                                aria-label="Vorschlag endgültig löschen"
+                                icon={<DeleteIcon />}
+                                size="sm"
+                            />
+                        </Tooltip>
                     )}
                     taskId={data._id}
                     mutate={mutate}

@@ -1,4 +1,4 @@
-import { Tooltip } from "@/components/card/components/tooltip";
+import { Tooltip } from "@/components/list-item/components/tooltip";
 import { Avatar, AvatarGroup } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import { Children } from "react";
